@@ -14,12 +14,20 @@ const User = require("../models/User.model");
 const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-router.get("/loggedin", (req, res) => {
+//Initial route identification: "/loggedIn"
+router.get("/session", (req, res) => {
   res.json(req.user);
 });
 
-router.post("/signup", isLoggedOut, (req, res) => {
-  const { username, password } = req.body;
+//Initial route identification: "/signup"
+router.post("/users", isLoggedOut, (req, res) => {
+  const { username, password, email } = req.body;
+
+  if (!email) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide your email address." });
+  }
 
   if (!username) {
     return res
@@ -46,13 +54,13 @@ router.post("/signup", isLoggedOut, (req, res) => {
   */
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then((found) => {
-    // If the user is found, send the message username is taken
+  User.findOne({ email }).then((found) => {
+    // If the email is found, send the message email is taken
     if (found) {
-      return res.status(400).json({ errorMessage: "Username already taken." });
+      return res.status(409).json({ errorMessage: "Email already taken." });
     }
 
-    // if user is not found, create a new user - start with hashing the password
+    // if email is not found, create a new user - start with hashing the password
     return bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
@@ -60,6 +68,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         // Create a user and save it in the database
         return User.create({
           username,
+          email,
           password: hashedPassword,
         });
       })
@@ -75,7 +84,7 @@ router.post("/signup", isLoggedOut, (req, res) => {
         if (error.code === 11000) {
           return res.status(400).json({
             errorMessage:
-              "Username need to be unique. The username you chose is already in use.",
+              "Email need to be unique. The email you chose is already in use.",
           });
         }
         return res.status(500).json({ errorMessage: error.message });
@@ -83,13 +92,14 @@ router.post("/signup", isLoggedOut, (req, res) => {
   });
 });
 
-router.post("/login", isLoggedOut, (req, res, next) => {
-  const { username, password } = req.body;
+//Initial route identification: "/login"
+router.post("/sessions", isLoggedOut, (req, res, next) => {
+  const { email, password } = req.body;
 
-  if (!username) {
+  if (!email) {
     return res
       .status(400)
-      .json({ errorMessage: "Please provide your username." });
+      .json({ errorMessage: "Please provide your email." });
   }
 
   // Here we use the same logic as above
@@ -100,18 +110,18 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
   }
 
-  // Search the database for a user with the username submitted in the form
-  User.findOne({ username })
+  // Search the database for a user with the email submitted in the form
+  User.findOne({ email })
     .then((user) => {
       // If the user isn't found, send the message that user provided wrong credentials
       if (!user) {
-        return res.status(400).json({ errorMessage: "Wrong credentials." });
+        return res.status(403).json({ errorMessage: "Wrong credentials." });
       }
 
       // If user is found based on the username, check if the in putted password matches the one saved in the database
       bcrypt.compare(password, user.password).then((isSamePassword) => {
         if (!isSamePassword) {
-          return res.status(400).json({ errorMessage: "Wrong credentials." });
+          return res.status(403).json({ errorMessage: "Wrong credentials." });
         }
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
@@ -127,7 +137,8 @@ router.post("/login", isLoggedOut, (req, res, next) => {
     });
 });
 
-router.get("/logout", isLoggedIn, (req, res) => {
+//Initial route identification: "/logout"
+router.delete("/session", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ errorMessage: err.message });
