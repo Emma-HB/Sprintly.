@@ -12,17 +12,17 @@ const storyCardSchema = new Schema(
         type: String, 
         required: true
     }, 
+    description: String,
     status: String, 
     priority: {
         type: String,
         enum: ['Highest', 'High', 'Medium', 'Low', 'Lowest'], 
-        default: 'Medium'
+        default: "Medium"
     }, 
     estimation: Number, 
     sprint_label: {
-        type: Schema.Types.ObjectId, 
-        ref: "SprintPlanning",
-        default: 'Backlog',
+        type: String, 
+        default: "Backlog"
     }
   },
   {
