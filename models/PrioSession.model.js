@@ -10,12 +10,12 @@ const PrioSessionSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: "StoryCard"
     }],
+    sessionPIN: String,
     prioStoryCard: [{
       participant_email: {
         type: String, 
         lowercase: true,
-        trim: true,
-        required: true,
+        trim: true
       },
       participant_name: {
         type: String

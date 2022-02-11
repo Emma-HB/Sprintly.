@@ -2,6 +2,8 @@ const router = require("express").Router();
 const authRoutes = require("./auth");
 const projectRoutes = require("./project");
 const storyCardRoutes = require("./storycard")
+const prioSessionsRoutes = require("./prioritization")
+
 
 /* GET home page */
 router.get("/", (req, res, next) => {
@@ -9,7 +11,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.use("/", authRoutes);
-router.use("/", projectRoutes)
-router.use("/", storyCardRoutes)
+router.use("/", projectRoutes);
+router.use("/", storyCardRoutes);
+router.use("/", prioSessionsRoutes);
 
 module.exports = router;
