@@ -49,6 +49,7 @@
 .blue-btn {
   background: var(--blue-background);
   color: var(--white);
+  text-decoration: none;
   border-radius: var(--main-radius);
   border: 0;
   font-family: var(--title-font);
@@ -101,9 +102,11 @@
   font-size: 120%;
 }
 
-.homepage-section p {
+.homepage-link {
   font-family: var(--title-font);
   font-size: 80%;
+  text-decoration: none;
+  color: var(--dark);
 }
 
 .homepage h2 {
@@ -210,4 +213,26 @@
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
+}
+
+/* 
+    DASHBOARD 
+*/
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard {
+  height: 100vh;
+}
+
+.dashboard p {
+  margin: 0;
+  color: var(--dark);
+}
+
+.logout-icon {
+  width: 5%
 }

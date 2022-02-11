@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Homepage extends Component {
   render() {
@@ -7,13 +8,13 @@ class Homepage extends Component {
         <div className="homepage-section">
           <nav>
             <img alt="Sprintly."></img>
-            <p>Log in</p>
-            <button className="blue-btn">Sign up</button>
+            <Link className="homepage-link" to={"/login"}>Login</Link>
+            <Link className="blue-btn" to={"/signup"}>Sign up</Link>
           </nav>
           <div className="homepage-container">
             <div>
               <h2>Reworking the sucess of Backlog planning</h2>
-              <button className="blue-btn try-it-btn">Try it now</button>
+                <Link className="blue-btn try-it-btn" to={"/signup"}>Try it now</Link>
             </div>
             <div className="empty-container-1"></div>
           </div>

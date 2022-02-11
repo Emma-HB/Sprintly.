@@ -1,16 +1,53 @@
 import './App.css';
-import React from 'react';
+import React, { Component } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom'; 
+
 import Homepage from './components/Homepage';
+import Signup from './components/auth/Signup'; 
+import Login from './components/auth/Login';
+import { loggedin } from './components/auth/auth-service';
+import Dashboard from './components/Dashboard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-      </header>
+class App extends Component {
+  state = { loggedInUser: null }
 
-      <Homepage />
-    </div>
-  );
+  fetchUser() {
+    if (this.state.loggedInUser === null) {
+      loggedin()
+        .then(response => {
+          this.setState({loggedInUser: response})
+        })
+        .catch(err => {
+          this.setState({loggedInUser: false})
+        })
+    }
+  }
+  
+  componentDidMount() {
+    this.fetchUser();
+  }
+ 
+  updateLoggedInUser = (userObj) => {
+    this.setState({
+      loggedInUser: userObj
+    })
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+        </header>
+
+        <Switch>
+          <Route exact path="/" component={Homepage}/>
+          <Route exact path='/signup' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Signup updateUser={this.updateLoggedInUser}/>))}/>
+          <Route exact path='/login' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Login updateUser={this.updateLoggedInUser}/>))}/>
+          <Route exact path="/dashboard" component={Dashboard}/>
+        </Switch>
+      </div>
+    );
+  }  
 }
 
 export default App;
