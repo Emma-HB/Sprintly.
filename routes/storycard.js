@@ -1,4 +1,4 @@
-const router = require("express").Router({ mergeParams : true });
+const router = require("express").Router();
 const mongoose = require('mongoose');
 const multer  = require('multer');
 const upload = multer({ dest: '/tmp' });
@@ -35,10 +35,9 @@ router.post ('/storycards', isLoggedIn, (req, res, next) => {
 
 //ROUTE 2 POST: IMPORT STORYCARDS FROM CSV FILE 
 //$$$$$$$$$$$$UPDATE MULTER.SINGLE AVEC LE NAME DE L'INPUT DU HTML
-router.post('/storycards/import', isLoggedIn, 
-upload.single('Sprintly - Storycard import - Test File - StoryCard Import.csv'),  
-(req, res, next) => {
+router.post('/storycards/import', isLoggedIn, upload.single('csv'), (req, res, next) => {
     console.log("check req.file", req.file)
+    res.json(req.file)
 })
 //const content = fs.readFileSync(req.file.path)
 
