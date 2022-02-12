@@ -236,3 +236,9 @@
 .logout-icon {
   width: 5%
 }
+
+.logout-btn {
+  background-color: #ffffff00;
+  border: none;
+  text-align: right;
+}

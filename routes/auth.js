@@ -138,7 +138,7 @@ router.post("/sessions", isLoggedOut, (req, res, next) => {
 });
 
 //Initial route identification: "/logout"
-router.delete("/session", isLoggedIn, (req, res) => {
+router.delete("/session", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ errorMessage: err.message });

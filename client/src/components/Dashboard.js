@@ -5,7 +5,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <Navbar />
+        <Navbar updateUser={this.props.updateUser}/>
         <p>Hi !</p>
       </div>
     )

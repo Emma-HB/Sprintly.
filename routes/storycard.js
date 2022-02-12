@@ -38,6 +38,7 @@ router.post ('/storycards', isLoggedIn, (req, res, next) => {
 router.post('/storycards/import', isLoggedIn, upload.single('csv'), (req, res, next) => {
     console.log("check req.file", req.file)
     res.json(req.file)
+    
 })
 //const content = fs.readFileSync(req.file.path)
 

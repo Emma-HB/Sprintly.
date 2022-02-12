@@ -43,7 +43,7 @@ class App extends Component {
           <Route exact path="/" component={Homepage}/>
           <Route exact path='/signup' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Signup updateUser={this.updateLoggedInUser}/>))}/>
           <Route exact path='/login' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Login updateUser={this.updateLoggedInUser}/>))}/>
-          <Route exact path="/dashboard" component={Dashboard}/>
+          <Route exact path='/dashboard' render={() => ( !this.state.loggedInUser ? (<Redirect to="/" /> ) : (<Dashboard updateUser={this.updateLoggedInUser}/>))}/>
         </Switch>
       </div>
     );
