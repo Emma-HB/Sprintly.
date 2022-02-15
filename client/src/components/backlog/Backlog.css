@@ -1,0 +1,17 @@
+section {
+    display: flex;
+}
+
+.addStoryCards {
+    display: flex;
+    flex-direction: column;
+}
+
+.workWithStoryCards {
+    display: flex;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
