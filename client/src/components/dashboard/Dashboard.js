@@ -44,7 +44,7 @@ class Dashboard extends Component {
           </aside>
 
           <div className="popin-background">
-            {/* <NewProject /> */}
+            <NewProject />
           </div>
 
         </div>

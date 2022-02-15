@@ -7,6 +7,7 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import { loggedin } from './components/auth/auth-service';
 import Dashboard from './components/dashboard/Dashboard';
+import Storycards from './components/Storycards';
 
 class App extends Component {
   state = { loggedInUser: null }
@@ -44,6 +45,8 @@ class App extends Component {
           <Route exact path='/signup' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Signup updateUser={this.updateLoggedInUser}/>))}/>
           <Route exact path='/login' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Login updateUser={this.updateLoggedInUser}/>))}/>
           <Route exact path='/dashboard' render={() => ( !this.state.loggedInUser ? (<Redirect to="/" /> ) : (<Dashboard updateUser={this.updateLoggedInUser}/>))}/>
+
+          <Route exact path='/projects/:id' component={Storycards}/>
         </Switch>
       </div>
     );

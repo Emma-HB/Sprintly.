@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import service  from '../auth/auth-service'; 
 
 class Projects extends Component {
 
@@ -9,11 +10,6 @@ class Projects extends Component {
   
   //To display the list of projects
   getAllProjects = () => {
-    const service = axios.create({
-      baseURL: 'http://localhost:5005/api',
-      withCredentials: true
-    });
-
     service.get('/projects')
     .then(response => {
       this.setState({
@@ -36,7 +32,7 @@ class Projects extends Component {
               <h3>{el.title}</h3>
               <p>{el.description}</p>
               <hr></hr>
-              <button>Update</button>
+              <Link to={`/projects/${el._id}`}>Update</Link>
             </li>
           )
         })}
