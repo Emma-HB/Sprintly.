@@ -9,7 +9,7 @@ class Dashboard extends Component {
 
   state = {
     username: '',
-    newProjectPopin: false
+    showPopin: false
   }
 
   //To display username on the dashboard
@@ -25,6 +25,11 @@ class Dashboard extends Component {
     this.fetchUsername();
   }
 
+  handleNewProject = () => {
+    console.log('coucou')
+    this.setState({showPopin: !this.state.showPopin})
+  }
+
   render() {
     return (
       <div className="dashboard">
@@ -34,18 +39,14 @@ class Dashboard extends Component {
           
           <div className="left-menu">
             <h1>{this.state.username}</h1>
-
-            <button className='left-menu-link' onClick={(e) => this.getAllProjects}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Projects</h2></button>
-
+            <button className='left-menu-link' onClick={e => this.getAllProjects()}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Projects</h2></button>
           </div>
           
           <aside className="list">
-            <Projects />
+            <Projects addNewProject={this.handleNewProject} />
           </aside>
 
-          <div className="popin-background">
-            <NewProject />
-          </div>
+          { this.state.showPopin && <NewProject  clear={this.handleNewProject}/> }
 
         </div>
       </div>

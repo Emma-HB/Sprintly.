@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 class NewProject extends Component {
@@ -33,8 +34,9 @@ class NewProject extends Component {
 
   render() {
     return (
-      <div className="new-project-popin">
-        <h2>Create New project</h2>
+      <div className="popin-background">
+        <div className="new-project-popin">
+          <h2>Create New project</h2>
           <form onSubmit={this.handleSubmit}>
               <div>
                 <label>Name: </label>
@@ -56,9 +58,10 @@ class NewProject extends Component {
               </div>
               <div>
                 <input type="submit" value="Submit" />
-                <button>Cancel</button>
+                <button onClick={e => this.props.clear()}>Cancel</button>
               </div>
           </form>
+        </div>
       </div>
     )
   }
