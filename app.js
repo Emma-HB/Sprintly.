@@ -19,6 +19,11 @@ require("./config")(app);
 const allRoutes = require("./routes");
 app.use("/api", allRoutes);
 
+app.get("/coucou", function(req,res,next) {
+  console.log('session= ',req.session)
+  res.send('coucou')
+})
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

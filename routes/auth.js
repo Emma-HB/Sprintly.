@@ -123,6 +123,7 @@ router.post("/sessions", isLoggedOut, (req, res, next) => {
         if (!isSamePassword) {
           return res.status(403).json({ errorMessage: "Wrong credentials." });
         }
+        console.log('user =', user)
         req.session.user = user;
         // req.session.user = user._id; // ! better and safer but in this case we saving the entire user object
         return res.json(user);

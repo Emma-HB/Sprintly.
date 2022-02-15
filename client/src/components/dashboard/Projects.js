@@ -1,0 +1,48 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+
+class Projects extends Component {
+
+  state = {
+    projects: []
+  }
+  
+  //To display the list of projects
+  getAllProjects = () => {
+    const service = axios.create({
+      baseURL: 'http://localhost:5005/api',
+      withCredentials: true
+    });
+
+    service.get('/projects')
+    .then(response => {
+      this.setState({
+        projects: response.data
+      })
+    })
+  }
+
+  componentDidMount() {
+    this.getAllProjects();
+  }
+
+  render() {
+    return (
+      <ul>
+        <li><button className="add-project-btn">+</button></li>
+        {this.state.projects.map((el) => {
+          return (
+            <li key={`${el.title}-${el.description}`}>
+              <h3>{el.title}</h3>
+              <p>{el.description}</p>
+              <hr></hr>
+              <button>Update</button>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+}
+
+export default Projects;

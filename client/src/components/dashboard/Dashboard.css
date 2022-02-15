@@ -1,0 +1,111 @@
+/* 
+    DASHBOARD 
+*/
+
+/* .navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard {
+  height: 100vh;
+}
+
+.dashboard p {
+  margin: 0;
+  color: var(--dark);
+}
+
+.logout-icon {
+  width: 5%
+} */
+
+
+.dashboard-section {
+  display: flex;
+  background-color: var(--light-background);
+}
+
+.left-menu {
+  border-right: 1px solid var(--light-grey);
+  height: 100vh;
+  width: 25%;
+  min-width: 25%;
+
+}
+
+.left-menu h1 {
+  color: var(--dark-blue);
+  padding-top: 15px; padding-inline-start: 20px;
+}
+
+.left-menu-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffffff00;
+  border:none;
+}
+
+.left-menu-icon {
+  width: 20%;
+  min-width: 20%;
+}
+
+.add-project-btn {
+  color: var(--dark-grey);
+  border: none;
+  border-radius: 180%;
+  padding: 2px 13px;
+  font-size: 300%;
+}
+
+.list ul {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  color: var(--dark-grey);
+}
+
+.list li {
+  list-style: none;
+  background-color: var(--light-background);
+  border-radius: var(--small-radius);
+  width: 250px;
+  padding: 20px;
+  margin: 10px;
+}
+
+/* 
+    NEW PROJECT POPIN 
+*/
+
+.popin-background {
+  backdrop-filter: blur(10px);
+  width: 100%;
+  position: absolute;
+}
+
+.new-project-popin {
+  background-color: var(--white);
+  border: solid 1px var(--blue-border);
+  border-radius: var(--small-radius);
+  width: 500px;
+  height: 70vh;
+  margin: 50px auto;
+  padding: 10px 30px;
+}
+
+.new-project-popin form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-project-popin form > div {
+  margin: 20px;
+  display: flex;
+  padding: 20px;
+}
+
+
+

@@ -6,7 +6,7 @@ import Homepage from './components/Homepage';
 import Signup from './components/auth/Signup'; 
 import Login from './components/auth/Login';
 import { loggedin } from './components/auth/auth-service';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 
 class App extends Component {
   state = { loggedInUser: null }

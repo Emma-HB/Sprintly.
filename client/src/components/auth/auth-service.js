@@ -11,7 +11,6 @@ function signup(username, password, email) {
 }
 export {signup}
 
-// HERE
 function loggedin() {
   return service.get('/session').then(response => response.data)
 }
