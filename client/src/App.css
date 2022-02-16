@@ -23,7 +23,7 @@
 
   /* borders */
   --blue-border: 1px solid rgba(22, 25, 251, 0.6);
-  --grey-border: 1px solid rgba(0, 0, 0, 0,5);
+  --grey-border: 1px solid rgb(165, 165, 165);
   --dashed-border: 1px dashed rgba(0, 0, 0, 0.5);
   --gradient-border: 6px solid linear-gradient(80.25deg, rgba(120, 140, 251, 0.6) 9.75%, rgba(22, 25, 251, 0.6) 49.02%);
 

@@ -26,7 +26,6 @@ class Dashboard extends Component {
   }
 
   handleNewProject = () => {
-    console.log('coucou')
     this.setState({showPopin: !this.state.showPopin})
   }
 
@@ -46,7 +45,7 @@ class Dashboard extends Component {
             <Projects addNewProject={this.handleNewProject} />
           </aside>
 
-          { this.state.showPopin && <NewProject  clear={this.handleNewProject}/> }
+          { this.state.showPopin && <NewProject  getData={() => this.getAllProjects()} hidePopin={this.handleNewProject}/> }
 
         </div>
       </div>

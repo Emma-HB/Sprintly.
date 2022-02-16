@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import service  from '../auth/auth-service'; 
 
 class NewProject extends Component {
 
@@ -11,18 +10,15 @@ class NewProject extends Component {
   
   //To add a new project
   handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const title = this.state.title;
     const description = this.state.description;
 
-    const service = axios.create({
-      baseURL: 'http://localhost:5005/api',
-      withCredentials: true
-    });
-
     service.post(('/projects'), { title, description})
       .then( () => {
-          this.setState({title: '', description: ''});
+        this.props.getData();
+        // this.setState({title: '', description: ''});
+        // this.history.push('/projects/:id')
       })
       .catch( error => console.log(error) )
   }
@@ -36,7 +32,7 @@ class NewProject extends Component {
     return (
       <div className="popin-background">
         <div className="new-project-popin">
-          <h2>Create New project</h2>
+          <h4>Create New project</h4>
           <form onSubmit={this.handleSubmit}>
               <div>
                 <label>Name: </label>
@@ -57,8 +53,10 @@ class NewProject extends Component {
                 />
               </div>
               <div>
-                <input type="submit" value="Submit" />
-                <button onClick={e => this.props.clear()}>Cancel</button>
+                <div className="popin-buttons">
+                  <input className="blue-btn" type="submit" value="Create" />
+                  <div className="grey-btn" onClick={e => this.props.hidePopin()}>Cancel</div>
+                </div>
               </div>
           </form>
         </div>
