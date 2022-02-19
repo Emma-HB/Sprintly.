@@ -11,7 +11,7 @@ import Login from './components/auth/Login';
 import { loggedin } from './components/auth/auth-service';
 import Dashboard from './components/dashboard/Dashboard';
 import Backlog from '../src/components/backlog/Backlog';
-import Storycards from './components/backlog/Storycards';
+import NewStoryCard from './components/backlog/NewStorycards'
 import ParticipantPages from './components/participant/ParticipantPages';
 
 class App extends Component {
@@ -52,7 +52,7 @@ class App extends Component {
           <Route exact path='/dashboard' render={() => ( !this.state.loggedInUser ? (<Redirect to="/" /> ) : (<Dashboard updateUser={this.updateLoggedInUser}/>))}/>
 
           <Route exact path='/projects/:id' component={Backlog}/>
-          <Route exact path='/storycards/new' component={Storycards}/>
+          <Route exact path='/storycards/new' component={NewStoryCard}/>
 
             <Route exact path='/participant/prioritization' component={ParticipantPages}/>
 
