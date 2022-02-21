@@ -1,17 +1,134 @@
-section {
+/* 
+    BACKLOG PAGE
+*/
+
+.backlog {
+    background-color: var(--light-background);
+    min-height: 100vh; 
+    padding: 10px;
+}
+
+.backlog-btns {
     display: flex;
+    justify-content: space-between;
 }
 
 .addStoryCards {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .workWithStoryCards {
     display: flex;
 }
 
+.workWithStoryCards > a {
+    text-decoration: none;
+    margin-left: 10px;
+    align-self: center;
+}
+
+.backlog-table >table {
+    margin-top: 50px;
+    width: 100%;
+}
+
+.backlog-table > table > thead {
+    background-color: var(--main-blue);
+    color: var(--white);
+    height: 40px;
+}
+
+.backlog-table > table > tbody > tr >td {
+    padding: 5px 8px;
+}
+
+.backlog-table > table > tbody > tr > td:nth-child(1) {
+    text-align: center;
+}
+
+.backlog-table > table > tbody > tr > td:nth-child(9) {
+    text-align: center;
+}
+
+.backlog-table > table > tbody > tr > td > img {
+    height: 20px;
+}
+
+.table-col-small {
+    width: 50px;
+}
+
+.table-col-medium {
+    width: 120px;
+}
+
+.table-col-large {
+    width: 350px;
+}
+
+/* 
+    NEW STORY CARD POPIN 
+*/
 .form {
     display: flex;
     flex-direction: column;
+}
+
+.popin-background {
+    backdrop-filter: blur(10px);
+    width: 100%;
+    position: absolute;
+}
+
+.new-storycard-popin {
+    background-color: var(--white);
+    border: var(--blue-border);
+    border-radius: var(--small-radius);
+    width: 600px;
+    margin: 100px auto;
+    padding: 10px 30px;
+    color: var(--main-blue);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--title-font);
+}
+
+.storycard-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    font-size: 0.75rem;
+}
+
+.storycard-priorityAndStoryPoints {
+    display: flex;
+    justify-content: space-between;
+}
+
+.storycard-priority > select {
+    width: 280px,
+}
+
+.storycard-item > input, textarea, select {
+    margin-top: 5px;
+}
+
+.storycard-item > input {
+    height: 20px;
+    padding: 8px;
+    border-radius: var(--small-radius);
+    border: var(--grey-border)
+}
+
+.storycard-item > textarea {
+    padding: 8px;
+    height: 100px ;
+    border-radius: var(--small-radius);
+    border: var(--grey-border);
+}
+
+.storycard-cta > input {
+    margin-right: 10px;
 }

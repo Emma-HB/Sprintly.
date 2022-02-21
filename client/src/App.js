@@ -1,6 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'; 
+import { Switch, Route } from 'react-router-dom'; 
 
 import Homepage from './components/Homepage';
 import Signup from './components/auth/Signup'; 
@@ -8,7 +8,7 @@ import Login from './components/auth/Login';
 import { loggedin } from './components/auth/auth-service';
 import Dashboard from './components/dashboard/Dashboard';
 import Backlog from '../src/components/backlog/Backlog';
-import Storycards from './components/backlog/Storycards';
+import NewStoryCard from './components/backlog/NewStorycards'
 import ParticipantPages from './components/participant/ParticipantPages';
 
 class App extends Component {
@@ -51,7 +51,7 @@ class App extends Component {
           <Route exact path='/login' render={(props) => (<Login updateUser={this.updateLoggedInUser} history={props.history} />)} />
           <Route exact path='/dashboard' render={(props) => (<Dashboard updateUser={this.updateLoggedInUser} history={props.history} />)}/>
           <Route exact path='/projects/:id' render={(props) => (<Backlog updateUser={this.updateLoggedInUser} history={props.history} />)}/>
-          <Route exact path='/storycards/new' render={(props) => (<Storycards updateUser={this.updateLoggedInUser} history={props.history} />)}/>
+          <Route exact path='/storycards/new' render={(props) => (<NewStoryCard updateUser={this.updateLoggedInUser} history={props.history} />)}/>
           <Route exact path='/participant/prioritization' render={(props) => (<ParticipantPages history={props.history} />)}/>
         </Switch>
       </div>

@@ -10,6 +10,7 @@ class NewProject extends Component {
   
   //To add a new project
   handleSubmit = (event) => {
+    event.preventDefault();
     const title = this.state.title;
     const description = this.state.description;
 
