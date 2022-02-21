@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
 
-  handleLogout = () => {
+  handleLogout = (event) => {
     logout()
       .then(() => {
         this.props.updateUser(false);
+        this.props.history.push('/')
       })
       .catch(err => console.log('error', err))
   }

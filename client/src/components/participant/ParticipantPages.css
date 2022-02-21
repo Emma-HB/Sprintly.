@@ -6,11 +6,14 @@
   height: 8vh;
 }
 
-.participant section {
-  height: 92vh;
+.participant-section {
   background-color: var(--light-background);
+}
+
+.prioritization-container {
+  height: 84vh;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-around;
 }
 
 .participant h4 {
@@ -26,11 +29,8 @@
   margin: 30px 20px;
   padding: 10px 20px;
   width: 40vw;
-}
-
-.drag-column ul {
-  padding-left: 0;
-  min-height: 40vw;
+  height: 82vh;
+  overflow: auto;
 }
 
 .drop-column {
@@ -38,21 +38,19 @@
   padding: 10px 20px;
   width: 40vw;
   color: var(--dark-blue);
-  font-family: var(--title-font);
+  overflow: auto;
 }
 
-.drop-column ul {
-  padding-left: 0;
-}
 
 .draggable-container {
   list-style: none;
   background-color: var(--main-background);
   color: var(--dark-grey);
   border-radius: var(--small-radius);
-  box-shadow: 0px 0px 44px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0px 0px 44px rgba(0, 0, 0, 0.1); */
   padding: 2px 15px;
   margin-top:  10px;
+  cursor: move;
 }
 
 .drop-target-container {
@@ -67,10 +65,14 @@
 }
 
 .background-warning {
-  background-color: var(--main-blue);
+  background-color: var(--light-background);
+  border: var(--dashed-border);
 }
 
-.background-light {
-  background-color: none;
+.prioritization-submit {
+  margin-left: 75%; 
+  transform: translateX(-60%);
+  margin-bottom: 20px;
+  padding: 10px 25px;
 }
 

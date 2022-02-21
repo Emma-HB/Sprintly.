@@ -1,149 +1,208 @@
-import React, { useState } from 'react';
 import './ParticipantPages.css';
-//import service  from '../auth/auth-service';
-
+import { useState, useRef, Component } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-const Prioritization = () => {
+// import service  from '../auth/auth-service'; 
 
-  const [ firstList, setFirstList ] = useState(() => [
-    { 
-      external_id: 'SCard ID',
-      epic: 'Story Card Epic',
-      summary : 'Story Card Summary',
-      priority: 'Priority',
-      estimation: 'Estimate'
+export default class Prioritization3 extends Component {
+
+  state = {
+    cardsFromDb: [
+      { 
+        _id: 'ffffggghhh',
+        external_id: 'SCard ID',
+        epic: 'Story Card Epic',
+        summary : 'Story Card Summary',
+        priority: 'Priority',
+        estimation: 'Estimate'
+      },
+      { 
+        _id: 'ggghhhkkkkkk',
+        external_id: '01',
+        epic: 'Story Card Epic',
+        summary : 'Story Card Summary',
+        priority: 'Priority',
+        estimation: 'Estimate'
+      },
+      {
+        _id: 'lllllmmmmmmm',
+        external_id: '02',
+        epic: 'Storage',
+        summary : 'Lorem ipsum ipsam...',
+        priority: 'Highest',
+        estimation: '30'
+      },
+      {
+        _id: '123lllllmmmmmmm',
+        external_id: '02',
+        epic: 'Storage BLABLABA',
+        summary : 'Lorem ipsum ipsam...',
+        priority: 'Highest',
+        estimation: '55555'
+      }
+    ]
+  }
+
+  // getCardsFromDb = () => {
+  //   service.get('/prioritizations/:id')
+  //   .then(response => {
+  //     this.setState({
+  //       cardsFromDb: response.data
+  //     })
+  //   })
+  // }
+  
+  // componentDidMount() {
+  //   this.getCardsFromDb();
+  // }
+
+  render () {
+    return (
+      <>
+        {this.state.cardsFromDb.length > 0 && (
+          <Container 
+            cards={this.state.cardsFromDb}
+          />  
+        )}
+      </>
+    )
+  }
+}
+
+const Container = ({cards}) => {
+  
+  //Create columns and cards
+
+  const cardsById = {}
+  for (let i = 0; i < cards.length; i ++) {
+    const card = cards[i]  
+    cardsById[card._id] = card
+  }
+
+  const [ columns, setColumns ] = useState(() => [
+    {
+      id: 1,
+      title: "Drag a Story Card...",
+      className: "drag-column",
+      cardIds: cards.map(card => card._id)
     },
     {
-      external_id: '0111',
-      epic: 'Storage ',
-      summary : 'Lorem ipsum ...',
-      priority: 'High',
-      estimation: '13'
+      id: 2,
+      title: "...And Drop it based on its importance or urgency",
+      className: "drop-column",
+      cardIds: []
     }
   ]);
 
-  const [ secondList, setSecondList ] = useState([]);
+  //Update of columns after drag and drop
+  const moveCard = (cardId, destColumnId, destColumnIndex) => {
 
-  const [{ isOver }, addToSecondListRef ] = useDrop({
-    accept: "firstListItem",
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver() // isOver() returns true if there is a drag operation in progress
-    })
-  });
+    const newColumns = columns.map(column => {
+      // 1) Remove the cardId for all columns
+      let newCardIds = column.cardIds.filter(id => id !== cardId);
 
-  const [{ isOver: isFirstListOver }, removeFromSecondListRef] = useDrop({
-    accept: "secondListItem", 
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver()
-    })
-  });
+      // 2) If this is the destination column, insert the cardId.
+      if (column.id === destColumnId) {
+        column.cardIds = [...newCardIds.slice(0, destColumnIndex), cardId, ...newCardIds.slice(destColumnIndex)];
+      } else {
+        column.cardIds = newCardIds;
+      }
+      return column;
+    });
+    setColumns(newColumns);
 
-  const movePlayer = (item) => {
-    console.log('item', item );
-    if (item && item.type === "firstListItem") {
-      console.log('dragElement', item)
-      //Accepting item of first list into the second list
-      setSecondList((_secondList) => [..._secondList, firstList[item.index]]);
-      setFirstList((_firstList) => _firstList.filter((_, idx) => idx !== item.index));
-    } else {
-      //Removing an item from second list
-      setFirstList((_firstList) => [...firstList, secondList[item.index]]);
-      setSecondList(_secondList => _secondList.filter((_, idx) => idx !== item.index));
-    }
-
+    console.log(columns[1].cardIds)
   };
 
-  const dragHoverSecondListBG = isOver ? "background-warning" : "background-light";
-  const dragHoverFirstListBG = isFirstListOver ? "background-warning" : "background-light";
-
   return (
-      <div className="participant">
-        <nav>
-          <img src="" alt="Sprintly." />
-        </nav>
+    <div className="participant">
+      <nav>
+        <img src="" alt="Sprintly." />
+      </nav>
 
-        <section>
-
-          <div className={`drag-column ${dragHoverFirstListBG}`}>
-            <h4>Drag a Story Card...</h4>           
-            <ul ref={removeFromSecondListRef}>
-              {firstList.map((el, idx) => {
-                return (
-                  <DraggableItem key={idx} 
-                    {...el}
-                    // summary={el.summary}
-                    // epic={el.epic}
-                    // priority={el.priority}
-                    // estimation={el.estimation}
-                    // external_id={el.external_id}
-
-                    index={idx}
-                    itemType="firstListItem"
-                    onDropPlayer={movePlayer}
+      <div className="participant-section">
+        <div className="prioritization-container">
+          {columns.map(column => (
+              <Column
+                key={column.id}
+                title={column.title}
+                className={column.className}
+              >
+                {column.cardIds.map((cardId, index) => (
+                  <DraggableCard
+                    {...cardsById[cardId]}
+                    key={cardId}
+                    id={cardId}
+                    columnId={column.id}
+                    columnIndex={index}
+                    moveCard={moveCard}
                   />
-                )
-              })}
-            </ul>
-          </div>
-
-          <div className="drop-column">
-            <h4>...And Drop it based on its importance or urgency</h4>
-            <ul ref={addToSecondListRef}>
-              <li className={`drop-target-container ${dragHoverSecondListBG}`}>
-                <p>1</p>
-              </li>
-              {secondList.map((el, idx) => {
-                return (
-                  <DraggableItem key={idx} 
-                    {...el}
-                    // summary={el.summary}
-                    // epic={el.epic}
-                    // priority={el.priority}
-                    // estimation={el.estimation}
-                    // external_id={el.external_id}
-
-                    index={idx}
-                    itemType="secondListItem"
-                    onDropPlayer={movePlayer}
+                ))}
+                {column.cardIds.length === 0 && (
+                  <DraggableCard
+                    isSpacer
+                    moveCard={cardId => moveCard(cardId, column.id, 0)}
                   />
-                )
-              })}
-            </ul>
-          </div>
+                )}
+              </Column>
+            ))}
+        </div>
 
-        </section>
+        <div><button className='prioritization-submit blue-btn'>Submit</button></div>
+
       </div>
+
+    </div>
   )
+}
+
+//Column component
+const Column = ({ title, className, children }) => {
+  return (
+    <div className={className}>
+      <h4>{title}</h4>
+      {children}
+    </div>
+  );
 };
 
-const DraggableItem = ({ summary, epic, priority, estimation, external_id, index, itemType, onDropPlayer}) => {
+//Card component
+const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, columnId, columnIndex, moveCard, isSpacer }) => {
+  const ref = useRef(null)
 
-  const [{ isDragging }, dragRef ] = useDrag({
-    type: itemType,
-    item: () => ({ index, type: itemType }), //item denotes the index position and the element type
-    end: (item, monitor) => {
-      // console.log(item, monitor)
-      const dropResult = monitor.getDropResult();
-
-      if(item && dropResult) {
-        onDropPlayer(item);
-      }
-    },
+  //Dragging
+  const [{ isDragging }, connectDrag ] = useDrag({
+    type: 'card',
+    item: { id }, 
     collect: (monitor) => ({
-      isDragging: monitor.isDragging() //collect method is like an event listener, it monitors whether the element is dragged an expose that information
+      isDragging: monitor.isDragging() 
     })
-  })
+  });
+
+  const dragging = isDragging ? "background-warning" : null
+
+  //Dropping
+  const [, connectDrop] = useDrop({
+    accept: 'card',
+    hover({ id: draggedId }) {
+      if (draggedId !== id) {
+        moveCard(draggedId, columnId, columnIndex)
+      }
+    }  
+  });
+
+  connectDrag(ref)
+  connectDrop(ref)
 
   return (
-    <li className="draggable-container" ref={dragRef}>
+    (!isSpacer) 
+    ? <div className={`draggable-container ${dragging}`} ref={ref}>
       <p>{summary}</p>
       <p>{epic}</p>
       <p>{priority}</p>
       <p>{estimation}</p>
       <p>{external_id}</p>
-    </li>
+    </div>
+    : <div className="drop-target-container" ref={ref}><p>Drop a card here</p></div>
   )
 }
-
-export default Prioritization;
