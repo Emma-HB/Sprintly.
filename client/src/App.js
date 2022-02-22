@@ -11,7 +11,8 @@ import Login from './components/auth/Login';
 import { loggedin } from './components/auth/auth-service';
 import Dashboard from './components/dashboard/Dashboard';
 import Backlog from '../src/components/backlog/Backlog';
-import NewStoryCard from './components/backlog/NewStorycards'
+import NewStoryCard from './components/backlog/NewStorycards';
+import StoryCardImport from './components/backlog/StoryCardImport';
 import ParticipantPages from './components/participant/ParticipantPages';
 
 class App extends Component {
@@ -53,6 +54,7 @@ class App extends Component {
 
           <Route exact path='/projects/:id' component={Backlog}/>
           <Route exact path='/storycards/new' component={NewStoryCard}/>
+          <Route exact path='/storycards/import' component={StoryCardImport}/>
 
             <Route exact path='/participant/prioritization' component={ParticipantPages}/>
 
