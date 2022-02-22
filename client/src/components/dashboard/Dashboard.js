@@ -32,7 +32,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="dashboard">
-        <Navbar updateUser={this.props.updateUser}/>
+        <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
 
         <div className="dashboard-section">
           
@@ -45,7 +45,7 @@ class Dashboard extends Component {
             <Projects addNewProject={this.handleNewProject} />
           </aside>
 
-          { this.state.showPopin && <NewProject  getData={() => this.getAllProjects()} hidePopin={this.handleNewProject}/> }
+          { this.state.showPopin && <NewProject  getData={() => this.getAllProjects()} hidePopin={this.handleNewProject} history={this.props.history}/> }
 
         </div>
       </div>

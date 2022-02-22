@@ -1,9 +1,6 @@
 import './App.css';
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'; 
-
-// import { DndProvider } from "react-dnd"
-// import { HTML5Backend } from "react-dnd-html5-backend"
+import { Switch, Route } from 'react-router-dom'; 
 
 import Homepage from './components/Homepage';
 import Signup from './components/auth/Signup'; 
@@ -16,17 +13,20 @@ import StoryCardImport from './components/backlog/StoryCardImport';
 import ParticipantPages from './components/participant/ParticipantPages';
 
 class App extends Component {
-  state = { loggedInUser: null }
+  state = { 
+    user: {}
+   }
 
-  fetchUser() {
-    if (this.state.loggedInUser === null) {
+  fetchUser = () => {
+    if (!this.state.user._id) {
       loggedin()
-        .then(response => {
-          this.setState({loggedInUser: response})
-        })
-        .catch(err => {
-          this.setState({loggedInUser: false})
-        })
+          .then(data => {
+            console.log(data)
+            this.setState({user: data})
+          })
+          .catch(err => this.setState({user: false}))
+    } else {
+      console.log('user already in the state')
     }
   }
   
@@ -36,7 +36,7 @@ class App extends Component {
  
   updateLoggedInUser = (userObj) => {
     this.setState({
-      loggedInUser: userObj
+      user: userObj
     })
   }
 
@@ -47,17 +47,16 @@ class App extends Component {
         </header>
 
         <Switch>
-          <Route exact path="/" component={Homepage}/>
-          <Route exact path='/signup' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Signup updateUser={this.updateLoggedInUser}/>))}/>
-          <Route exact path='/login' render={() => ( this.state.loggedInUser ? (<Redirect to="/dashboard" /> ) : (<Login updateUser={this.updateLoggedInUser}/>))}/>
-          <Route exact path='/dashboard' render={() => ( !this.state.loggedInUser ? (<Redirect to="/" /> ) : (<Dashboard updateUser={this.updateLoggedInUser}/>))}/>
 
-          <Route exact path='/projects/:id' component={Backlog}/>
-          <Route exact path='/storycards/new' component={NewStoryCard}/>
-          <Route exact path='/storycards/import' component={StoryCardImport}/>
-
-            <Route exact path='/participant/prioritization' component={ParticipantPages}/>
-
+          <Route exact path='/' render={(props) => <Homepage user={this.state.user} />} />
+          <Route exact path='/signup' render={(props) => (<Signup updateUser={this.updateLoggedInUser} history={props.history} />)} />
+          <Route exact path='/login' render={(props) => (<Login updateUser={this.updateLoggedInUser} history={props.history} />)} />
+          <Route exact path='/dashboard' render={(props) => (<Dashboard updateUser={this.updateLoggedInUser} history={props.history} />)}/>
+          <Route exact path='/projects/:id' render={(props) => (<Backlog updateUser={this.updateLoggedInUser} history={props.history} />)}/>
+          <Route exact path='/storycards/new' render={(props) => (<NewStoryCard updateUser={this.updateLoggedInUser} history={props.history} />)}/>
+          <Route exact path='/storycards/import' render={(props) => (<StoryCardImport updateUser={this.updateLoggedInUser} history={props.history} />)}/>
+          <Route exact path='/participant/prioritization' render={(props) => (<ParticipantPages history={props.history} />)}/>
+        
         </Switch>
       </div>
     );

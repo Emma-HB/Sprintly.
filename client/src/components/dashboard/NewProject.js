@@ -15,10 +15,8 @@ class NewProject extends Component {
     const description = this.state.description;
 
     service.post(('/projects'), { title, description})
-      .then( () => {
-        this.props.getData();
-        // this.setState({title: '', description: ''});
-        // this.history.push('/projects/:id')
+      .then( (response) => {
+        this.props.history.push(`/projects/${response.data._id}`)
       })
       .catch( error => console.log(error) )
   }

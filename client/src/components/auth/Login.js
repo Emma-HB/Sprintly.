@@ -13,7 +13,8 @@ class Login extends Component {
     login(email, password)
       .then(response => {
           this.setState({ email: "", password: "" });
-          this.props.updateUser(response)
+          this.props.updateUser(response);
+          this.props.history.push('/dashboard');
       })
       .catch(err => console.log('error', err))
   }
