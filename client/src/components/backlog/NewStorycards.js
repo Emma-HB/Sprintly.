@@ -6,10 +6,10 @@ class NewStorycard extends Component {
       //project_id: "",
       epic: "", 
       summary: "", 
-      externalID: "",
+      external_id: "",
       description: "", 
       priority: "",
-      storyPoints: "",
+      estimation: "",
       status: "",
       sprint_label: ""
   };
@@ -19,10 +19,10 @@ class NewStorycard extends Component {
     //const projectID = this.props.match.params.id; 
     const epic = this.state.epic;
     const summary = this.state.summary;
-    const externalID = this.state.externalID;
+    const external_id = this.state.external_id;
     const description = this.state.description;
     const priority = this.state.priority;
-    const storyPoints = this.state.storyPoints;
+    const estimation = this.state.estimation;
     const status = this.state.status;
     const sprint_label = this.state.sprint_label;
 
@@ -30,23 +30,23 @@ class NewStorycard extends Component {
       //projectID, 
       epic, 
       summary, 
-      externalID, 
+      external_id, 
       description, 
       priority, 
-      storyPoints, 
+      estimation, 
       status, 
       sprint_label
     })
     .then( () => {
-      this.props.getData();
+      console.log("regarder les props", this.props)
       this.setState({
-        //projectID: "",
+        projectID: "",
         epic: "", 
         summary: "",
-        externalID: "", 
+        external_id: "", 
         description: "",
         priority: "",
-        storyPoints: "",
+        estimation: "",
         status: "",
         sprint_label: ""
       });
@@ -75,7 +75,7 @@ class NewStorycard extends Component {
             </div>
             <div className='storycard-externalid storycard-item'>
               <label>External ID:</label>
-              <input type="text" name="externalID" value={this.state.externalID} onChange={ e => this.handleChange(e)}/>
+              <input type="text" name="external_id" value={this.state.external_id} onChange={ e => this.handleChange(e)}/>
             </div>
             <div className='storycard-description storycard-item'>
               <label>Description:</label>
@@ -94,7 +94,7 @@ class NewStorycard extends Component {
               </div>
               <div className='storycard-storypoints storycard-item'>
                 <label>Story Points:</label>
-                <input type="number" name="storyPoints" value={this.state.storyPoints} onChange={ e => this.handleChange(e)}/>
+                <input type="number" name="estimation" value={this.state.estimation} onChange={ e => this.handleChange(e)}/>
               </div>
             </div>
             <div className='storycard-status storycard-item'>

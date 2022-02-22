@@ -33,7 +33,7 @@ class Projects extends Component {
               <h3>{el.title}</h3>
               <p>{el.description}</p>
               <hr></hr>
-              <Link to={`/projects/${el._id}`}>Update</Link>
+              <Link to={`/projects/${el._id}`}>View</Link>
             </li>
           )
         })}

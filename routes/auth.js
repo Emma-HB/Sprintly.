@@ -10,8 +10,8 @@ const saltRounds = 10;
 // Require the User model in order to interact with the database
 const User = require("../models/User.model");
 
-// Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
-const isLoggedOut = require("../middleware/isLoggedOut");
+// Require necessary (isLiggedIn) middleware in order to control access to specific routes
+//const isLoggedOut = require("../middleware/isLoggedOut");
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 //Initial route identification: "/loggedIn"
@@ -20,7 +20,7 @@ router.get("/session", (req, res) => {
 });
 
 //Initial route identification: "/signup"
-router.post("/users", isLoggedOut, (req, res) => {
+router.post("/users", (req, res) => {
   const { username, password, email } = req.body;
 
   if (!email) {
@@ -93,7 +93,7 @@ router.post("/users", isLoggedOut, (req, res) => {
 });
 
 //Initial route identification: "/login"
-router.post("/sessions", isLoggedOut, (req, res, next) => {
+router.post("/sessions", (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email) {

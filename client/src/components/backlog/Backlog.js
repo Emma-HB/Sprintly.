@@ -34,7 +34,7 @@ class Backlog extends Component {
                 <div className='backlog'>
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>
-                            <Link className="blue-btn" to={`/storycards/new`}>+ Create Story Card</Link>
+                            <Link className="blue-btn" to={`/storycards/new?toto=coucou`}>+ Create Story Card</Link>
                             {/* ?projectid=${this.props.match.params._id}` */}
                             <Link className="" to={"/storycards/import"}>+ Import from CSV</Link>
                         </div>
