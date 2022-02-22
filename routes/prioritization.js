@@ -3,28 +3,31 @@ const mongoose = require('mongoose');
 
 const PrioSession = require('../models/PrioSession.model')
 
-// Require necessary (isLoggedOut and isLiggedIn) middleware in order to control access to specific routes
+// Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedIn = require("../middleware/isLoggedIn");
 
 // ROUTE 1 POST: CREATE NEW PROJECT
 router.post ('/prioritizations', isLoggedIn, (req, res, next) => {
-    PrioSession.create({
+	PrioSession.create({
+		user_id: req.session.user._id, 
         user_id: req.session.user._id, 
+		user_id: req.session.user._id, 
+		selectedStoryCard:req.body.selectedStoryCard, 
         selectedStoryCard:req.body.selectedStoryCard, 
-        sessionPIN: Math.floor(100000 + Math.random() * 900000),
-        prioStoryCard: {
-            participant_email: req.body.prioStoryCard.participant_email,
-            participant_name: req.body.prioStoryCard.participant_name,
-            participant_prio : []
-        }      
-    })
-    .then(response => {
-        res.status(201).json(response);
-    })
-    .catch(err => {
-        res.json(err);
-    })
-
+		selectedStoryCard:req.body.selectedStoryCard, 
+		sessionPIN: Math.floor(100000 + Math.random() * 900000),
+		prioStoryCard: {
+			participant_email: "",//req.body.prioStoryCard.participant_email,
+			participant_name: "",//req.body.prioStoryCard.participant_name,
+			participant_prio : []
+		}          
+	})
+	.then(response => {
+		res.status(201).json(response);
+	})
+	.catch(err => {
+		res.json(err);
+	})
 });
 
 // ROUTE 2 PUT: ADD A PARTICIPANT TO A PRIO SESSION
@@ -61,11 +64,9 @@ router.put('/prioritizations/:id/contribute', (req, res, next) => {
 })
 
 // ROUTE 4 GET: RETRIEVE ALL PRIO SESSION INFO
-
-router.get('/prioritizations/:id', isLoggedIn, (req, res, next) => {
-    console.log("test", req.body)
-    
+router.get('/prioritizations/:id', (req, res, next) => {
     PrioSession.findById(req.params.id)
+		.populate('selectedStoryCard')
     .then(foundPrio => {
         res.json(foundPrio)
     })

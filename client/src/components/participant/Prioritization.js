@@ -2,66 +2,38 @@ import './ParticipantPages.css';
 import { useState, useRef, Component } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
-// import service  from '../auth/auth-service'; 
+import service  from '../auth/auth-service'; 
 
-export default class Prioritization3 extends Component {
+export default class Prioritization extends Component {
 
   state = {
-    cardsFromDb: [
-      { 
-        _id: 'ffffggghhh',
-        external_id: 'SCard ID',
-        epic: 'Story Card Epic',
-        summary : 'Story Card Summary',
-        priority: 'Priority',
-        estimation: 'Estimate'
-      },
-      { 
-        _id: 'ggghhhkkkkkk',
-        external_id: '01',
-        epic: 'Story Card Epic',
-        summary : 'Story Card Summary',
-        priority: 'Priority',
-        estimation: 'Estimate'
-      },
-      {
-        _id: 'lllllmmmmmmm',
-        external_id: '02',
-        epic: 'Storage',
-        summary : 'Lorem ipsum ipsam...',
-        priority: 'Highest',
-        estimation: '30'
-      },
-      {
-        _id: '123lllllmmmmmmm',
-        external_id: '02',
-        epic: 'Storage BLABLABA',
-        summary : 'Lorem ipsum ipsam...',
-        priority: 'Highest',
-        estimation: '55555'
-      }
-    ]
+    cardsFromDb: [],
+    participant_email:"participant@gmail.com"
   }
 
-  // getCardsFromDb = () => {
-  //   service.get('/prioritizations/:id')
-  //   .then(response => {
-  //     this.setState({
-  //       cardsFromDb: response.data
-  //     })
-  //   })
-  // }
+  getCardsFromDb = () => {
+    //TO DO: récupérer prioritization_id ⤵️
+    service.get('/prioritizations/6214eb1b1cd519cf61b4ca0d')
+    .then(response => {
+      //console.log(response.data.selectedStoryCard)      
+
+      this.setState({
+        cardsFromDb: response.data.selectedStoryCard
+      })
+    })
+  }
   
-  // componentDidMount() {
-  //   this.getCardsFromDb();
-  // }
+  componentDidMount() {
+    this.getCardsFromDb();
+  }
 
   render () {
     return (
       <>
         {this.state.cardsFromDb.length > 0 && (
-          <Container 
+          <Container key={this.state.cardsFromDb._id}
             cards={this.state.cardsFromDb}
+            participant_email={this.state.participant_email}
           />  
         )}
       </>
@@ -69,7 +41,7 @@ export default class Prioritization3 extends Component {
   }
 }
 
-const Container = ({cards}) => {
+const Container = ({cards, participant_email}) => {
   
   //Create columns and cards
 
@@ -111,8 +83,22 @@ const Container = ({cards}) => {
     });
     setColumns(newColumns);
 
-    console.log(columns[1].cardIds)
+    console.log('prioStoryCard', columns[1].cardIds)
   };
+
+  //Display a popin when the partipant has submitted his prioritization
+  const [popin, setPopin] = useState(false);
+
+  //To update prioStoryCard array (push > columns[1].cardIds)
+  const handleSubmit = () => {
+    //récupérer l'id de la prioritization ⤵️
+    service.put(('/prioritization/6214eb1b1cd519cf61b4ca0d/contribute'), {participant_email, participant_prio : columns[1].cardIds})
+      .then( () => {
+      //TO DO: redirection vers popin avec effet blur 
+      setPopin(true)
+      })
+      .catch( error => console.log(error) )
+  }
 
   return (
     <div className="participant">
@@ -148,10 +134,12 @@ const Container = ({cards}) => {
             ))}
         </div>
 
-        <div><button className='prioritization-submit blue-btn'>Submit</button></div>
+        <div><button className='prioritization-submit blue-btn' onClick={() => handleSubmit()}>Submit</button></div>
 
+        {popin &&
+          <div className="popin-completed">Succes</div>
+        }
       </div>
-
     </div>
   )
 }
