@@ -32,17 +32,34 @@ router.post ('/prioritizations', isLoggedIn, (req, res, next) => {
 router.put('/prioritizations/participate', (req, res, next) => {
     console.log('test', req.body)
 
-    PrioSession.updateOne(
-        //extra filter the check if captured email does not already exist in DB
-        {sessionPIN: req.body.sessionPIN/*, prioStoryCard: req.body.prioStoryCard.participant_email*/ }, 
-        {$push: {prioStoryCard : req.body.prioStoryCard}}
-        )   
-    .then(() => {
-        res.json({ message: `Completed.` });
+    //TO DO: extra filter the check if captured email does not already exist in DB
+
+    PrioSession.findOneAndUpdate({sessionPIN: req.body.sessionPIN},
+      {$push: { prioStoryCard : {
+          participant_email: req.body.participant_email,
+          participant_name: req.body.participant_name,
+        }}}
+      )   
+      .then((prioSessionFromPIN) => {
+        // console.log(prioSessionFromPIN)
+        res.json({ prioSessionFromPIN });
       })
       .catch(err => {
         res.json(err);
       })
+
+    // PrioSession.updateOne({sessionPIN: req.body.sessionPIN}, 
+    //     {$push: {prioStoryCard : {
+    //       participant_email: req.body.participant_email,
+    //       participant_name: req.body.participant_name,
+    //     }}}
+    //     )   
+    // .then(() => {
+    //     res.json({ message: `Completed.` });
+    //   })
+    //   .catch(err => {
+    //     res.json(err);
+    //   })
 })
 
 // ROUTE 3 PUT: SUBMIT PARTICIPANT PRIO TO A PRIO SESSION

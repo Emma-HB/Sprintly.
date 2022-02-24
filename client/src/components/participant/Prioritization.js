@@ -8,15 +8,14 @@ export default class Prioritization extends Component {
 
   state = {
     cardsFromDb: [],
-    participant_email:"participant@gmail.com"
+    participant_email: this.props.participant_email,
+    prioSessionId: this.props.prioSessionId
   }
 
   getCardsFromDb = () => {
-    //TO DO: récupérer prioritization_id ⤵️
-    service.get('/prioritizations/6214eb1b1cd519cf61b4ca0d')
+    service.get(`/prioritizations/${this.state.prioSessionId}`)
     .then(response => {
       //console.log(response.data.selectedStoryCard)      
-
       this.setState({
         cardsFromDb: response.data.selectedStoryCard
       })
@@ -34,6 +33,7 @@ export default class Prioritization extends Component {
           <Container key={this.state.cardsFromDb._id}
             cards={this.state.cardsFromDb}
             participant_email={this.state.participant_email}
+            prioSessionId={this.state.prioSessionId}
           />  
         )}
       </>
@@ -41,7 +41,7 @@ export default class Prioritization extends Component {
   }
 }
 
-const Container = ({cards, participant_email}) => {
+const Container = ({cards, participant_email, prioSessionId}) => {
   
   //Create columns and cards
 
@@ -91,10 +91,8 @@ const Container = ({cards, participant_email}) => {
 
   //To update prioStoryCard array (push > columns[1].cardIds)
   const handleSubmit = () => {
-    //TO DO: récupérer l'id de la prioritization ⤵️
-    service.put(('/prioritizations/6214eb1b1cd519cf61b4ca0d/contribute'), {participant_email, participant_prio : columns[1].cardIds})
+    service.put((`/prioritizations/${prioSessionId}/contribute`), {participant_email, participant_prio : columns[1].cardIds})
       .then( () => {
-      //TO DO: redirection vers popin avec effet blur 
       setPopin(true)
       })
       .catch( error => console.log(error) )
@@ -137,7 +135,9 @@ const Container = ({cards, participant_email}) => {
         <div><button className='prioritization-submit blue-btn' onClick={() => handleSubmit()}>Submit</button></div>
 
         {popin &&
-          <div className="popin-completed">Succes</div>
+          <div className="popin-background">
+            <div className="new-project-popin">Thanks you for your time !</div>
+          </div>
         }
       </div>
     </div>
