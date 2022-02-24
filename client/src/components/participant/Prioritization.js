@@ -91,8 +91,8 @@ const Container = ({cards, participant_email}) => {
 
   //To update prioStoryCard array (push > columns[1].cardIds)
   const handleSubmit = () => {
-    //récupérer l'id de la prioritization ⤵️
-    service.put(('/prioritization/6214eb1b1cd519cf61b4ca0d/contribute'), {participant_email, participant_prio : columns[1].cardIds})
+    //TO DO: récupérer l'id de la prioritization ⤵️
+    service.put(('/prioritizations/6214eb1b1cd519cf61b4ca0d/contribute'), {participant_email, participant_prio : columns[1].cardIds})
       .then( () => {
       //TO DO: redirection vers popin avec effet blur 
       setPopin(true)
