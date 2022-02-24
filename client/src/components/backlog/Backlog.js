@@ -11,7 +11,21 @@ import NewStorycard from './NewStorycards';
 
 class Backlog extends Component {
 
-    state = {listOfStoryCards : []};
+    state = {
+        projectName : "",
+        listOfStoryCards : []
+    };
+
+    getProjectName = () => {
+        service.get(`/projects/${this.props.match.params.id}`)
+
+        .then(response => {
+            console.log("test", response.data)
+            this.setState({
+              projectName: response.data.title
+            })
+          })
+    }
 
     getAllStoryCards = () => {
         service.get(('/storycards'))
@@ -25,6 +39,7 @@ class Backlog extends Component {
 
     componentDidMount() {
         this.getAllStoryCards();
+        this.getProjectName();
       }
 
     render() {
@@ -34,8 +49,7 @@ class Backlog extends Component {
                 <div className='backlog'>
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>
-                            <Link className="blue-btn" to={`/storycards/new?toto=coucou`}>+ Create Story Card</Link>
-                            {/* ?projectid=${this.props.match.params._id}` */}
+                            <Link className="blue-btn" to={`/storycards/new?project_id=${this.props.match.params.id}`}>+ Create Story Card</Link>
                             <Link className="" to={"/storycards/import"}>+ Import from CSV</Link>
                         </div>
                         <div className='workWithStoryCards'>
@@ -43,6 +57,10 @@ class Backlog extends Component {
                             <Link className="grey-btn" to={"/"}>Start Sprint Planning</Link>
                         </div>
                     </section>
+
+                    <div>
+                        <h3><a href='/dashboard'>All Projects</a> | {this.state.projectName}</h3>
+                    </div>
 
                     <div className='backlog-table'>
                         <table>

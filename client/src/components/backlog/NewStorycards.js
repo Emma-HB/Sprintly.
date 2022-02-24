@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import service  from '../auth/auth-service'; 
 
+const queryString = require('query-string');
+
+
 class NewStorycard extends Component {
   state = { 
-      //project_id: "",
+      projectID: "",
       epic: "", 
       summary: "", 
       external_id: "",
@@ -15,8 +18,10 @@ class NewStorycard extends Component {
   };
 
   handleFormSubmit = (event) => {
+    const parsedProjectID = queryString.parse(this.props.history.location.search);
+
     event.preventDefault();
-    //const projectID = this.props.match.params.id; 
+    const project_id = parsedProjectID.projectid; 
     const epic = this.state.epic;
     const summary = this.state.summary;
     const external_id = this.state.external_id;
@@ -27,7 +32,7 @@ class NewStorycard extends Component {
     const sprint_label = this.state.sprint_label;
 
     service.post(("/storycards"), { 
-      //projectID, 
+      project_id, 
       epic, 
       summary, 
       external_id, 
@@ -38,18 +43,7 @@ class NewStorycard extends Component {
       sprint_label
     })
     .then( () => {
-      console.log("regarder les props", this.props)
-      this.setState({
-        projectID: "",
-        epic: "", 
-        summary: "",
-        external_id: "", 
-        description: "",
-        priority: "",
-        estimation: "",
-        status: "",
-        sprint_label: ""
-      });
+      console.log("Regarder this.props", project_id)
     })
     .catch( error => console.log(error) )
   };
@@ -85,6 +79,7 @@ class NewStorycard extends Component {
               <div className='storycard-priority storycard-item'>
                 <label htmlFor='priority'>Priority:</label>
                 <select name="priority" id="priority" value={this.state.priority} onChange={ e => this.handleChange(e)}>
+                  <option value="select">--Select option</option>
                   <option value="highest">Highest</option>
                   <option value="high">High</option>
                   <option value="medium">Medium</option>

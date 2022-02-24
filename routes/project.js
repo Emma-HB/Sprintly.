@@ -34,4 +34,18 @@ router.get('/projects', isLoggedIn, (req, res, next) => {
     });
 });
 
+// ROUTE 3 GET: DISPLAY A PROJECT
+router.get('/projects/:id', isLoggedIn, (req, res, next) => {
+
+    Project.findById(req.params.id)
+    .then(foundProjects => {
+        console.log('Check', foundProjects)
+        res.json(foundProjects)
+    })
+    .catch(err => {
+        res.json(err)
+    });
+});
+
+
 module.exports = router;
