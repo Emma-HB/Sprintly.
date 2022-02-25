@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import service  from '../auth/auth-service'; 
 
-const queryString = require('query-string');
-
 class NewProject extends Component {
 
   state = {

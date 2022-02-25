@@ -100,10 +100,6 @@ const Container = ({cards, participant_email, prioSessionId}) => {
 
   return (
     <div className="participant">
-      <nav>
-        <img src="" alt="Sprintly." />
-      </nav>
-
       <div className="participant-section">
         <div className="prioritization-container">
           {columns.map(column => (

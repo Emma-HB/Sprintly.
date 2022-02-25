@@ -38,7 +38,11 @@ class ParticipantPages extends Component {
 
   render () {
     return (
-      <>
+      <div className="participant">
+        <nav>
+          <img src="" alt="Sprintly." />
+        </nav>
+        
         {!this.state.prioSessionId 
         ? <Access
           handleSubmit={this.handleSubmit}
@@ -54,7 +58,7 @@ class ParticipantPages extends Component {
             />
           </DndProvider>
         )}      
-      </>
+      </div>
     )
   }
 }

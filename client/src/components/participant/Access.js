@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 export default class Access extends Component {
   render () {
     return (
-      <div className="participant-section">
-        <div>
-          <p>Welcome on Sprintly, your favorite tool to share your business expectation ! 🎉🎉🎉</p>
+      <div className="welcome-section">
+        <div className="welcome-popin">
+          <p>Welcome on Sprintly,your favorite tool to share your business expectation ! 🎉🎉🎉</p>
 
           <form onSubmit={this.props.handleSubmit}>
             <div>
@@ -35,11 +35,7 @@ export default class Access extends Component {
                   onChange={e => this.props.handleChange(e)}
                 />              
               </div>
-              <div>
-                <div className="popin-buttons">
-                  <input className="blue-btn" type="submit" value="Enter" />
-                </div>
-              </div>
+              <button className=" welcome-popin-btn blue-btn" type="submit">Enter</button>
           </form>
         </div>
       </div>
