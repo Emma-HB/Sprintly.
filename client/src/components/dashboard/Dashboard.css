@@ -28,15 +28,16 @@
 
 .left-menu {
   border-right: 1px solid var(--light-grey);
-  height: 100vh;
+  height: 92vh;
   width: 25%;
   min-width: 25%;
-
 }
 
 .left-menu h1 {
   color: var(--dark-blue);
-  padding-top: 15px; padding-inline-start: 20px;
+  padding-top: 25px; padding-inline-start: 40px;
+  font-family: var(--title-font);
+  font-size: 160%;
 }
 
 .left-menu-link {
@@ -45,6 +46,17 @@
   align-items: center;
   background-color: #ffffff00;
   border:none;
+  width: 70%;
+  margin: 5px 40px;
+  color: var(--dark-grey);
+  font-family: var(--title-font);
+  font-size: 60%; 
+  cursor: pointer;
+}
+
+.left-menu-link:hover {
+  background-color: var(--light-background);
+  border-radius: var(--small-radius);
 }
 
 .left-menu-icon {
@@ -73,7 +85,7 @@
   border-radius: var(--small-radius);
   width: 250px;
   padding: 20px;
-  margin: 10px;
+  margin: 20px 10px;
 }
 
 /* 
