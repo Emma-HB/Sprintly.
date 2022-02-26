@@ -63,7 +63,9 @@ class Dashboard extends Component {
           <aside className="list">
             { this.state.showProjects && 
               <Projects addNewProject={this.handleNewProject} />}
+          </aside>
 
+          <aside>
             {this.state.showPrios && 
               <Prioritizations />}
           </aside>
