@@ -16,7 +16,7 @@ class Navbar extends Component {
   render() {
     return (
       <div className="navbar">
-        <Link to={"/"}><img alt="Sprintly."></img></Link>
+        <Link to={"/"}><img className="sprintly-icon" src={'assets/sprintly-logo.png'}alt="Sprintly."></img></Link>
         <button className='logout-btn' onClick={this.handleLogout}><img className="logout-icon" src={'/assets/Logout.png'} alt="logout icon"/></button>
       </div>
     )

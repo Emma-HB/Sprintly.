@@ -233,8 +233,13 @@
   color: var(--dark);
 }
 
+.sprintly-icon {
+  margin: 10px 40px;
+  width: 50%;
+}
+
 .logout-icon {
-  width: 5%
+  width: 5%;
 }
 
 .logout-btn {
