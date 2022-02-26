@@ -3,17 +3,16 @@ const { Schema, model } = require("mongoose");
 const projectSchema = new Schema(
   {
     user_id : {
-        type: Schema.Types.ObjectId, 
-        ref: "User"},
+      type: Schema.Types.ObjectId, 
+      ref: "User"},
     title : {
-        type: String, 
-        required: true, 
-        default : 'My new project'
+      type: String, 
+      required: true, 
+      default : 'My new project'
     },
-    description: String
+    description: String,
   },
   {
-    // extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );

@@ -4,12 +4,15 @@ import {loggedin} from '../auth/auth-service';
 import Navbar from '../Navbar';
 import Projects from './Projects';
 import NewProject from './NewProject';
+import Prioritizations from './Prioritizations';
 
 class Dashboard extends Component {
 
   state = {
     username: '',
-    showPopin: false
+    showPopin: false,
+    showProjects: true,
+    showPrios: false
   }
 
   //To display username on the dashboard
@@ -29,6 +32,20 @@ class Dashboard extends Component {
     this.setState({showPopin: !this.state.showPopin})
   }
 
+  displayProjects = () => {
+    this.setState({
+      showProjects: true,
+      showPrios: false
+    })
+  }
+
+  displayPrios = () => {
+    this.setState({
+      showProjects: false,
+      showPrios: true
+    })
+  }
+
   render() {
     return (
       <div className="dashboard">
@@ -38,11 +55,17 @@ class Dashboard extends Component {
           
           <div className="left-menu">
             <h1>{this.state.username}</h1>
-            <button className='left-menu-link' onClick={e => this.getAllProjects()}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Projects</h2></button>
+            <button className='left-menu-link' onClick={(e) => {this.displayProjects(e)}}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Projects</h2></button>
+
+            <button className='left-menu-link' onClick={(e) => {this.displayPrios(e)}}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Prioritizations</h2></button>
           </div>
           
           <aside className="list">
-            <Projects addNewProject={this.handleNewProject} />
+            { this.state.showProjects && 
+              <Projects addNewProject={this.handleNewProject} />}
+
+            {this.state.showPrios && 
+              <Prioritizations />}
           </aside>
 
           { this.state.showPopin && <NewProject  getData={() => this.getAllProjects()} hidePopin={this.handleNewProject} history={this.props.history}/> }

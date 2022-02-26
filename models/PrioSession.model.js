@@ -6,6 +6,10 @@ const PrioSessionSchema = new Schema(
       type: Schema.Types.ObjectId, 
       ref: "User"
     },
+    project_id: {
+      type: Schema.Types.ObjectId,
+      ref: "Project"
+    },
     selectedStoryCard: [{
       type: Schema.Types.ObjectId, 
       ref: "StoryCard"

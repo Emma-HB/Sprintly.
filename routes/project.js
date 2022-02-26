@@ -8,44 +8,41 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 // ROUTE 1 POST: CREATE NEW PROJECT
 router.post ('/projects', isLoggedIn, (req, res, next) => {
-    Project.create({
-        user_id: req.session.user._id, 
-        title: req.body.title, 
-        description: req.body.description
-    })
-    .then(response => {
-        res.status(201).json(response);
-    })
-    .catch(err => {
-        res.json(err);
-    })
+  Project.create({
+    user_id: req.session.user._id, 
+    title: req.body.title, 
+    description: req.body.description
+  })
+  .then(response => {
+    res.status(201).json(response);
+  })
+  .catch(err => {
+    res.json(err);
+  })
 });
 
 // ROUTE 2 GET: DISPLAY LIST OF PROJECTS
 
 router.get('/projects', isLoggedIn, (req, res, next) => {
-
-    Project.find({user_id: req.session.user._id})
+  Project.find({user_id: req.session.user._id})
     .then(foundProjects => {
-        res.json(foundProjects)
+      res.json(foundProjects)
     })
     .catch(err => {
-        res.json(err)
+      res.json(err)
     });
 });
 
 // ROUTE 3 GET: DISPLAY A PROJECT
 router.get('/projects/:id', isLoggedIn, (req, res, next) => {
-
-    Project.findById(req.params.id)
-    .then(foundProjects => {
-        console.log('Check', foundProjects)
-        res.json(foundProjects)
+  Project.findById(req.params.id)
+    .then(foundProject => {
+      console.log('Check', foundProject)
+      res.json(foundProject)
     })
     .catch(err => {
-        res.json(err)
+      res.json(err)
     });
 });
-
 
 module.exports = router;
