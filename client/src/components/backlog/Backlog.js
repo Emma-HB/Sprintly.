@@ -2,25 +2,25 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import service  from '../auth/auth-service'; 
 
-import Navbar from '../Navbar';
-
 import './Backlog.css'; 
-import NewStorycard from './NewStorycards';
 
+import Navbar from '../Navbar';
+import NewStorycard from './NewStorycards';
 
 
 class Backlog extends Component {
 
     state = {
         projectName : "",
-        listOfStoryCards : []
+        listOfStoryCards : [], 
+        selectedStoryCard: []
     };
 
     getProjectName = () => {
         service.get(`/projects/${this.props.match.params.id}`)
 
         .then(response => {
-            console.log("test", response.data)
+            console.log('Réponse', this.props)
             this.setState({
               projectName: response.data.title
             })
@@ -28,7 +28,8 @@ class Backlog extends Component {
     }
 
     getAllStoryCards = () => {
-        service.get(('/storycards'))
+
+        service.get((`/storycards?project_id=${this.props.match.params.id}`))
             .then (responseFromAPI => {
                 this.setState({
                     listOfStoryCards: responseFromAPI.data
@@ -37,10 +38,21 @@ class Backlog extends Component {
             .catch(err => console.log('Error while fetching your Story Cards', err))
     }
 
+    handleStoryCardsSubmit = () => {
+        const selectedStoryCard = this.state.selectedStoryCard;
+
+        service.post(('/prioritizations/'), { selectedStoryCard})
+            .then( (response) => {
+                console.log('Regarder la Réponse', response)
+                this.props.history.push(`/prioritizations/new/${response.data._id}`)
+            })
+            .catch( error => console.log(error) )
+    }
+
     componentDidMount() {
         this.getAllStoryCards();
         this.getProjectName();
-      }
+    }
 
     render() {
         return(
@@ -53,6 +65,8 @@ class Backlog extends Component {
                             <Link className="" to={"/storycards/import"}>+ Import from CSV</Link>
                         </div>
                         <div className='workWithStoryCards'>
+                            <button className="grey-btn" onClick={this.handleStoryCardsSubmit}>Launch Business Prioritisation</button>
+                            <button className="grey-btn">Start Sprint Planning</button>
                             <Link className="grey-btn" to={"/prioritizations"}>Launch Business Prioritisation</Link>
                             <Link className="grey-btn" to={"/"}>Start Sprint Planning</Link>
                         </div>
@@ -81,7 +95,14 @@ class Backlog extends Component {
                                 {this.state.listOfStoryCards.map( storycard => {
                                     return(
                                         <tr key={storycard._id}>
-                                            <td><input type="checkbox" name="Select" /></td>
+                                            <td><input type="checkbox" name="Select" onClick={(e) => {
+                                                console.log('Regarder mes SC', this.state.selectedStoryCard)
+                                                if(e.target.checked === true ) {
+                                                    this.state.selectedStoryCard.push(storycard._id)
+                                                } else {
+                                                    this.state.selectedStoryCard.splice(this.state.selectedStoryCard.findIndex(storyCard => storyCard === storycard._id), 1)
+                                                }
+                                            }}/></td>
                                             <td>{storycard.external_id}</td>
                                             <td>{storycard.epic}</td>
                                             <td>{storycard.summary}</td>

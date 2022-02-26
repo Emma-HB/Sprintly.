@@ -6,8 +6,8 @@ const PrioSession = require('../models/PrioSession.model')
 // Require necessary (isLoggedOut and isLoggedIn) middleware in order to control access to specific routes
 const isLoggedIn = require("../middleware/isLoggedIn");
 
-// ROUTE 1 POST: CREATE NEW PROJECT
-router.post ('/prioritizations', isLoggedIn, (req, res, next) => {
+// ROUTE 1 POST: CREATE NEW PRIORIZATION
+router.post ('/prioritizations/', isLoggedIn, (req, res, next) => {
   PrioSession.create({
     user_id: req.session.user._id,
     project_id: req.body.project_id, 
@@ -48,6 +48,19 @@ router.put('/prioritizations/participate', (req, res, next) => {
     })
 })
 
+// ROUTE 6 GET : DISPLAY PRIO SESSION FROM SPECIFIC PRIO SESSION ID
+router.get('/prioritizations/exact', isLoggedIn, (req, res, next) => {
+  PrioSession.find({_id: req.query.id})
+    .then( filteredPrioritization => {
+      console.log("consolelog 2", req.query)
+      res.json( filteredPrioritization );
+    })
+    .catch( err => {
+        res.json(err);
+    })
+});
+
+
 // ROUTE 3 PUT: SUBMIT PARTICIPANT PRIO TO A PRIO SESSION
 router.put('/prioritizations/:id/contribute', (req, res, next) => {
   console.log("check sur req.body", req.body)
@@ -81,7 +94,8 @@ router.get('/prioritizations/:id', (req, res, next) => {
     });
 })
 
-// ROUTE 5 GET : DISPLAY ALL PRIO SESSION
+
+// ROUTE 5 GET : DISPLAY ALL PRIO SESSION OF A USER
 router.get('/prioritizations', isLoggedIn, (req, res, next) => {
   PrioSession.find({user_id: req.session.user._id})
     .populate('project_id')
@@ -92,5 +106,7 @@ router.get('/prioritizations', isLoggedIn, (req, res, next) => {
       res.json(err)
     });
 });
+
+
 
 module.exports = router;
