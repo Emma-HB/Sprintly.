@@ -20,7 +20,7 @@ export default class Results extends Component {
     service.get(`/prioritizations/${this.props.match.params.id}`)
     .then(response => {
       console.log(response.data)
-      console.log(response.data.prioStoryCard[14].participant_prio)
+      console.log(response.data.prioStoryCard)
 
       this.setState({
         prioritization: response.data,
@@ -68,6 +68,16 @@ export default class Results extends Component {
             <div className="prioritization-container">
               <div className="drag-column">
                 <div>
+                  <div>
+                    <div>
+                      <div>{this.state.results.length}</div>
+                      <div>Users who entered prioritization session</div>
+                    </div>
+                    {/* <div>
+                      <div>XXXX</div>
+                      <div>Users who validate their prioritization</div>
+                    </div> */}
+                  </div>
                   <div>Participants results</div>
                   <div>Prioritization of {this.state.date}</div>
                 </div>
