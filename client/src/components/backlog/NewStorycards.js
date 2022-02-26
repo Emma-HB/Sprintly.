@@ -6,7 +6,7 @@ const queryString = require('query-string');
 
 class NewStorycard extends Component {
   state = { 
-      projectID: "",
+      project_id: "",
       epic: "", 
       summary: "", 
       external_id: "",
@@ -17,11 +17,17 @@ class NewStorycard extends Component {
       sprint_label: ""
   };
 
+  handleCancel = (event) => {
+    const parsedProjectID = queryString.parse(this.props.history.location.search)
+
+    let cancelPath = `/projects/${parsedProjectID.project_id}`;
+    this.props.history.push(cancelPath);
+  }
   handleFormSubmit = (event) => {
     const parsedProjectID = queryString.parse(this.props.history.location.search);
 
     event.preventDefault();
-    const project_id = parsedProjectID.projectid; 
+    const project_id = parsedProjectID.project_id; 
     const epic = this.state.epic;
     const summary = this.state.summary;
     const external_id = this.state.external_id;
@@ -42,8 +48,10 @@ class NewStorycard extends Component {
       status, 
       sprint_label
     })
-    .then( () => {
-      console.log("Regarder this.props", project_id)
+    .then( (response) => {
+      console.log('Regarder le projectID',project_id)
+      console.log('Coucou', response)
+      this.props.history.push(`/projects/${parsedProjectID.project_id}`)
     })
     .catch( error => console.log(error) )
   };
@@ -80,11 +88,11 @@ class NewStorycard extends Component {
                 <label htmlFor='priority'>Priority:</label>
                 <select name="priority" id="priority" value={this.state.priority} onChange={ e => this.handleChange(e)}>
                   <option value="select">--Select option</option>
-                  <option value="highest">Highest</option>
-                  <option value="high">High</option>
-                  <option value="medium">Medium</option>
-                  <option value="low">Low</option>
-                  <option value="lowest">Lowest</option>
+                  <option value="Highest">Highest</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                  <option value="Lowest">Lowest</option>
                 </select>
               </div>
               <div className='storycard-storypoints storycard-item'>
@@ -98,7 +106,7 @@ class NewStorycard extends Component {
             </div>
             <div className='storycard-cta'>
               <input className='blue-btn' type="submit" value="Add Story Card" />
-              <button className='grey-btn'>Cancel</button>
+              <button className='grey-btn' onClick={this.handleCancel}>Cancel</button>
             </div>
           </form>
         </div>            

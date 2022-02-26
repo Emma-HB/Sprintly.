@@ -24,7 +24,7 @@ router.post ('/projects', isLoggedIn, (req, res, next) => {
 // ROUTE 2 GET: DISPLAY LIST OF PROJECTS
 
 router.get('/projects', isLoggedIn, (req, res, next) => {
-  Project.find({user_id: req.session.user._id})
+  Project.find({project_id: req.query.project_id})
     .then(foundProjects => {
       res.json(foundProjects)
     })
@@ -37,7 +37,6 @@ router.get('/projects', isLoggedIn, (req, res, next) => {
 router.get('/projects/:id', isLoggedIn, (req, res, next) => {
   Project.findById(req.params.id)
     .then(foundProject => {
-      console.log('Check', foundProject)
       res.json(foundProject)
     })
     .catch(err => {

@@ -13,6 +13,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 
 
+
 // ROUTE 1 POST: CREATE NEW STORYCARD
 router.post ('/storycards', isLoggedIn, (req, res, next) => {
     console.log('Console.log', req.body)
@@ -66,12 +67,11 @@ router.delete('/storycards/:id', isLoggedIn, (req, res, next) => {
       })
 })
 
+
 // ROUTE 5 GET: DISPLAY ALL STORYCARD OF A PROJECT
 router.get('/storycards', isLoggedIn, (req, res, next) => {
 
-
     StoryCard.find({project_id: req.query.project_id}) 
-    //AMELIORATION: FILTRER EGALEMENT SUR LE USER_ID POUR QUE LE USER DE LA SESSION NE PUISSE PAS ACCEDER A DES PROJETS QUI NE SONT PAS LES SIENS
     .then(projectStoryCard =>{
         res.json(projectStoryCard);
     })
