@@ -35,6 +35,11 @@ export default class Access extends Component {
                   onChange={e => this.props.handleChange(e)}
                 />              
               </div>
+
+              {this.props.errorMessage && (
+                <p className="error">{this.props.errorMessage}</p>
+               )}
+
               <button className=" welcome-popin-btn blue-btn" type="submit">Enter</button>
           </form>
         </div>

@@ -3,7 +3,7 @@ import { login } from './auth-service';
 import { Link } from 'react-router-dom';
 
 class Login extends Component {
-  state = { email: '', password: '' }
+  state = { email: '', password: '', errorMessage: ''}
 
   handleFormSubmit = (event) => {
     event.preventDefault();
@@ -12,11 +12,11 @@ class Login extends Component {
 
     login(email, password)
       .then(response => {
-          this.setState({ email: "", password: "" });
-          this.props.updateUser(response);
-          this.props.history.push('/dashboard');
+        this.setState({ email: "", password: "", errorMessage: ""});
+        this.props.updateUser(response);
+        this.props.history.push('/dashboard');
       })
-      .catch(err => console.log('error', err))
+      .catch(err =>  this.setState({errorMessage: err.response.data.errorMessage}) )
   }
     
   handleChange = (event) => {  
@@ -36,6 +36,11 @@ class Login extends Component {
           
           <button>Log in</button>
         </form>
+
+        {this.state.errorMessage && (
+          <p className="error">{this.state.errorMessage}</p>
+        )}
+
         <aside>
           <Link to={"/"}>Forgot password?</Link>
         </aside>
