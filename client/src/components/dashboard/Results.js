@@ -58,7 +58,7 @@ export default class Results extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
 
         <div className="participant">
           <div className="participant-section">

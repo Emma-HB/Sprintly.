@@ -57,7 +57,7 @@ class Backlog extends Component {
     render() {
         return(
             <div>
-                <Navbar />
+              <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
                 <div className='backlog'>
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>

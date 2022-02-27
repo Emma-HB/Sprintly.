@@ -31,7 +31,7 @@ class NewPrioritization extends Component {
   render() {
     return(
       <div>
-      <Navbar />
+        <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
         <div className='new-storycard-popin'>
           <section>
             <p>The session will happen here:</p>

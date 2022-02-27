@@ -6,6 +6,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import Prioritization from './Prioritization';
 import Access from './Access';
+import Navbar from '../Navbar';
 
 class ParticipantPages extends Component {
   state = {
@@ -41,10 +42,8 @@ class ParticipantPages extends Component {
   render () {
     return (
       <div className="participant">
-        <nav>
-          <img src="" alt="Sprintly." />
-        </nav>
-        
+        <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
+
         {!this.state.prioSessionId 
         ? <Access
           handleSubmit={this.handleSubmit}
