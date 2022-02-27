@@ -41,7 +41,7 @@ class Backlog extends Component {
     handleStoryCardsSubmit = () => {
         const selectedStoryCard = this.state.selectedStoryCard;
 
-        service.post(('/prioritizations/'), { selectedStoryCard})
+        service.post(('/prioritizations/'), { selectedStoryCard, project_id: this.props.match.params.id})
             .then( (response) => {
                 console.log('Regarder la Réponse', response)
                 this.props.history.push(`/prioritizations/new/${response.data._id}`)
