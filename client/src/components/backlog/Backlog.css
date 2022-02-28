@@ -19,17 +19,32 @@
     align-items: center;
 }
 
+.import-btn {
+    font-family: var(--title-font);
+    color: var(--main-blue);
+    font-size: 00.75rem;
+    margin-top: 5px;
+}
+
 .workWithStoryCards {
     display: flex;
 }
 
-.workWithStoryCards > a {
+.workWithStoryCards > button {
     text-decoration: none;
     margin-left: 10px;
     align-self: center;
+    width: 220px;
 }
 
-.backlog-table >table {
+h3 {
+    font-family: var(--title-font);
+    color: var(--main-blue);
+    font-size: 1.2rem;
+    margin-top: 50px;
+}
+
+.backlog-table > table {
     margin-top: 50px;
     width: 100%;
 }
@@ -79,7 +94,6 @@
 .popin-background {
     backdrop-filter: blur(10px);
     width: 100%;
-    position: absolute;
 }
 
 .new-storycard-popin {
@@ -132,3 +146,29 @@
 .storycard-cta > input {
     margin-right: 10px;
 }
+
+/* 
+    EDIT STORY CARD POPIN 
+*/
+
+.popinEdit-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(10px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popinEdit-inner {
+    position: relative;
+    background-color: white;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+
+} 

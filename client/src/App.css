@@ -57,11 +57,22 @@
   padding: 15px 20px;
 }
 
+.blue-secondary-btn {
+  background: var(--white);
+  color: var(--main-blue);
+  text-decoration: none;
+  border-radius: var(--main-radius);
+  border: 3px solid var(--main-blue);
+  font-family: var(--title-font);
+  font-size: 80%;
+  padding: 15px 20px;
+}
+
 .grey-btn {
   background: var(--mid-grey);
   color: var(--white);
   border-radius: var(--main-radius);
-  border: 0;
+  border: 0 ;
   font-family: var(--title-font);
   font-size: 80%;
   padding: 15px 20px;

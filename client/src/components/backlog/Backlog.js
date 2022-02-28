@@ -6,6 +6,8 @@ import './Backlog.css';
 
 import Navbar from '../Navbar';
 import NewStorycard from './NewStorycards';
+import EditStoryCard from './EditStoryCard';
+import ViewStoryCard from './ViewStoryCard';
 
 
 class Backlog extends Component {
@@ -13,14 +15,16 @@ class Backlog extends Component {
     state = {
         projectName : "",
         listOfStoryCards : [], 
-        selectedStoryCard: []
+        selectedStoryCard: [],
+        viewStoryCard: "",
+        showEditPopin: false,
+        showViewPopin: false,
     };
 
     getProjectName = () => {
         service.get(`/projects/${this.props.match.params.id}`)
 
         .then(response => {
-            console.log('Réponse', this.props)
             this.setState({
               projectName: response.data.title
             })
@@ -31,6 +35,7 @@ class Backlog extends Component {
 
         service.get((`/storycards?project_id=${this.props.match.params.id}`))
             .then (responseFromAPI => {
+                console.log("Regarder responseFromAPI", responseFromAPI)
                 this.setState({
                     listOfStoryCards: responseFromAPI.data
                 })
@@ -38,12 +43,26 @@ class Backlog extends Component {
             .catch(err => console.log('Error while fetching your Story Cards', err))
     }
 
+    showViewPopin = () => {
+
+        const storycardID = "Coucou"
+
+        service.get((`/storycards/`))
+            .then( (response) => {
+                this.setState({showViewPopin: !this.state.showViewPopin});
+            })
+            .catch( error => console.log(error) )
+    }
+    
+    showEditPopin = () => {
+        this.setState({showEditPopin: !this.state.showEditPopin});
+    }
+
     handleStoryCardsSubmit = () => {
         const selectedStoryCard = this.state.selectedStoryCard;
 
-        service.post(('/prioritizations/'), { selectedStoryCard})
+        service.post(('/prioritizations/'), { selectedStoryCard })
             .then( (response) => {
-                console.log('Regarder la Réponse', response)
                 this.props.history.push(`/prioritizations/new/${response.data._id}`)
             })
             .catch( error => console.log(error) )
@@ -62,13 +81,13 @@ class Backlog extends Component {
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>
                             <Link className="blue-btn" to={`/storycards/new?project_id=${this.props.match.params.id}`}>+ Create Story Card</Link>
-                            <Link className="" to={"/storycards/import"}>+ Import from CSV</Link>
+                            <Link className="import-btn" to={"/storycards/import"}>+ Import from CSV</Link>
                         </div>
                         <div className='workWithStoryCards'>
-                            <button className="grey-btn" onClick={this.handleStoryCardsSubmit}>Launch Business Prioritisation</button>
-                            <button className="grey-btn">Start Sprint Planning</button>
-                            <Link className="grey-btn" to={"/prioritizations"}>Launch Business Prioritisation</Link>
-                            <Link className="grey-btn" to={"/"}>Start Sprint Planning</Link>
+                            <button 
+                            className={this.state.selectedStoryCard.length > 1 ? 'blue-secondary-btn' : 'grey-btn'}
+                            onClick={this.handleStoryCardsSubmit}>Launch Prioritisation</button>
+                            <button className="grey-btn">Start Planning</button>
                         </div>
                     </section>
 
@@ -96,14 +115,18 @@ class Backlog extends Component {
                                     return(
                                         <tr key={storycard._id}>
                                             <td><input type="checkbox" name="Select" onClick={(e) => {
-                                                console.log('Regarder mes SC', this.state.selectedStoryCard)
+                                                console.log("Count checkboxes1", this.state.selectedStoryCard )
                                                 if(e.target.checked === true ) {
                                                     this.state.selectedStoryCard.push(storycard._id)
                                                 } else {
                                                     this.state.selectedStoryCard.splice(this.state.selectedStoryCard.findIndex(storyCard => storyCard === storycard._id), 1)
                                                 }
                                             }}/></td>
-                                            <td>{storycard.external_id}</td>
+                                            <td><button onClick={this.showViewPopin}>{storycard.external_id}</button>
+                                            <ViewStoryCard 
+                                                trigger = {this.state.showViewPopin} 
+                                                storycardID = {this.state.storycardID} />
+                                            </td>
                                             <td>{storycard.epic}</td>
                                             <td>{storycard.summary}</td>
                                             <td>{storycard.status}</td>
