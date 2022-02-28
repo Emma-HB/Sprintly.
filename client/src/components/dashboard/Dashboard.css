@@ -20,13 +20,11 @@
 .left-menu {
   border-right: 1px solid var(--light-grey);
   height: 92vh;
-  width: 25%;
-  min-width: 25%;
 }
 
 .left-menu h1 {
   color: var(--dark-blue);
-  padding-top: 25px; padding-inline-start: 40px;
+  padding: 30px 0 10px; padding-inline-start: 30px;
   font-family: var(--title-font);
   font-size: 160%;
 }
@@ -37,8 +35,8 @@
   align-items: center;
   background-color: #ffffff00;
   border:none;
-  width: 70%;
-  margin: 5px 40px;
+  width: 230px;
+  margin: 5px 40px 0 25px;
   color: var(--dark-grey);
   font-family: var(--title-font);
   font-size: 60%; 
@@ -51,8 +49,8 @@
 }
 
 .left-menu-icon {
-  width: 20%;
-  min-width: 20%;
+  width: 45px;
+  min-width: 40px;
 }
 
 
@@ -75,7 +73,7 @@
   border: 1px solid var(--main-background);
   width: 250px;
   padding: 20px;
-  margin: 20px 10px;
+  margin: 20px 15px;
 }
 
 .list li:hover {
@@ -211,7 +209,7 @@
   margin: 50px;
   border-radius: var(--main-radius);
   border: 1px solid var(--white);
-  width: 67vw;
+  width: 70vw;
 }
 
 .prio-list {
@@ -220,7 +218,6 @@
   width: 100%;
   height: 100%;
   white-space: nowrap;
-  transition: 0.3s;
   border-bottom: 1px solid var(--white);
   box-sizing: border-box;
   display: flex;
@@ -258,6 +255,7 @@
 .prio-list .link {
   font-size: 15px;
   cursor: pointer;
+  margin-right: 8px;
 }
 
 .prio-list .session-pin {
