@@ -42,7 +42,7 @@
 
 .App {
   background: var(--dark-background);
-  min-height: 100vh;
+  /* height: 100%; */
   color: var(--dark);
 }
 
@@ -229,19 +229,6 @@
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
-}
-
-/* 
-    DASHBOARD 
-*/
-
-.dashboard {
-  height: 100vh;
-}
-
-.dashboard p {
-  margin: 0;
-  color: var(--dark);
 }
 
 

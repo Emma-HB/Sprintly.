@@ -37,7 +37,7 @@
     width: 220px;
 }
 
-h3 {
+.backlog h3 {
     font-family: var(--title-font);
     color: var(--main-blue);
     font-size: 1.2rem;

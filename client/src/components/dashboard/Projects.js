@@ -25,15 +25,16 @@ class Projects extends Component {
   render() {
     return (
       <ul>
-        <li><button className="add-project-btn" onClick={e => this.props.addNewProject()}>+</button></li>
+        <li className="add-new-project"><button className="add-project-btn" onClick={e => this.props.addNewProject()}>+</button></li>
 
         {this.state.projects.map((el) => {
           return (
-            <li key={`${el.title}-${el.description}`}>
+            <li className="project-container"key={`${el.title}-${el.description}`}>
               <h3>{el.title}</h3>
-              <p>{el.description}</p>
-              <hr></hr>
-              <Link to={`/projects/${el._id}`}>View</Link>
+              <div>
+                <p>{el.description}</p>
+              </div>
+              <button className="blue-btn"><Link className="project-link"to={`/projects/${el._id}`}>View</Link></button>
             </li>
           )
         })}
