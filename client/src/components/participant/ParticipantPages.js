@@ -6,13 +6,15 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 import Prioritization from './Prioritization';
 import Access from './Access';
+import Navbar from '../Navbar';
 
 class ParticipantPages extends Component {
   state = {
     sessionPIN: "",
     participant_name: "",
     participant_email: "",
-    prioSessionId: ""
+    prioSessionId: "",
+    errorMessage: ""
   }
 
   //To update prioSession with participant infos
@@ -29,20 +31,19 @@ class ParticipantPages extends Component {
 
     service.put(('/prioritizations/participate'), {sessionPIN, participant_email, participant_name})
       .then( (response) => {
-        console.log('coucou', response.data.prioSessionFromPIN._id)
         this.setState({
-          prioSessionId: response.data.prioSessionFromPIN._id})
+          prioSessionId: response.data.prioSessionFromPIN._id,
+          errorMessage: ""
         })
-      .catch( error => console.log(error) )
+      })
+      .catch(err =>  this.setState({errorMessage: err.response.data.errorMessage}) )
   }
 
   render () {
     return (
       <div className="participant">
-        <nav>
-          <img src="" alt="Sprintly." />
-        </nav>
-        
+        <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
+
         {!this.state.prioSessionId 
         ? <Access
           handleSubmit={this.handleSubmit}
@@ -50,6 +51,7 @@ class ParticipantPages extends Component {
           participant_name={this.state.participant_name}
           participant_email={this.state.participant_email}
           handleChange={this.handleChange}
+          errorMessage={this.state.errorMessage}
         />
         : (<DndProvider backend={HTML5Backend}>
             <Prioritization 

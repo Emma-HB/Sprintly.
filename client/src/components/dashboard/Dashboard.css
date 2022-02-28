@@ -171,8 +171,6 @@
 .prio-list-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 40%;
   justify-content: space-around;
   background-color: var(--light-background);
   padding-left: 0;
@@ -214,6 +212,11 @@
   padding: 0 5px;
 }
 
+.empty-prio {
+  width: 70vw;
+  padding: 20px;
+}
+
 .prio-list .link {
   font-size: 15px;
   cursor: pointer;
@@ -229,7 +232,15 @@
 
 .prio-list .blue-btn {
   font-size: 10px;
-  padding: 12px 16px;
+  padding: 5px 16px;
+  width: 16%;
   margin-left: 10vw;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+}
+
+.export-icon {
+  width: 30%;
 }

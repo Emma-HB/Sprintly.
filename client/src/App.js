@@ -12,7 +12,7 @@ import NewStoryCard from './components/backlog/NewStorycards';
 import StoryCardImport from './components/backlog/StoryCardImport';
 import NewPrioritization from './components/backlog/NewPrioritization';
 import ParticipantPages from './components/participant/ParticipantPages';
-import Results from './components/dashboard/Result';
+import Results from './components/dashboard/Results';
 
 class App extends Component {
   state = { 
@@ -58,7 +58,7 @@ class App extends Component {
           <Route exact path='/storycards/new' render={(props) => (<NewStoryCard updateUser={this.updateLoggedInUser} history={props.history} />)}/>
           <Route exact path='/storycards/import' render={(props) => (<StoryCardImport updateUser={this.updateLoggedInUser} history={props.history} />)}/>
           <Route exact path='/prioritizations/new/:id' render={(routerProps) => (<NewPrioritization updateUser={this.updateLoggedInUser} {...routerProps} />)}/>
-          <Route exact path='/participant/prioritization' render={(props) => (<ParticipantPages history={props.history} />)}/>
+          <Route exact path='/participant' render={(props) => (<ParticipantPages history={props.history} />)}/>
           <Route exact path='/prioritizations/:id' render={(routerProps) => (<Results {...routerProps} />)}/>
         
         </Switch>

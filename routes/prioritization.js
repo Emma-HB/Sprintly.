@@ -12,12 +12,7 @@ router.post ('/prioritizations/', isLoggedIn, (req, res, next) => {
     user_id: req.session.user._id,
     project_id: req.body.project_id, 
     selectedStoryCard:req.body.selectedStoryCard, 
-    sessionPIN: Math.floor(100000 + Math.random() * 900000),
-    // prioStoryCard: {
-    //   participant_email: "",
-    //   participant_name: "",
-    //   participant_prio : []
-    //   }          
+    sessionPIN: Math.floor(100000 + Math.random() * 900000)      
   })
   .then(response => {
     res.status(201).json(response);
@@ -31,6 +26,36 @@ router.post ('/prioritizations/', isLoggedIn, (req, res, next) => {
 router.put('/prioritizations/participate', (req, res, next) => {
   console.log('test', req.body)
 
+  const { sessionPIN, participant_name, participant_email } = req.body;
+
+  if (!sessionPIN) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide the session PIN." });
+  }
+
+  if (!participant_name) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide your name." });
+  }
+
+  if (!participant_email) {
+    return res
+      .status(400)
+      .json({ errorMessage: "Please provide your email." });
+  }
+
+  // Using a regular expression to control if the email adress is valid
+  const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+  if (!regex.test(participant_email)) {
+    return res.status(400).json( {
+      errorMessage:
+        "Please provide a valid email address.",
+    });
+  }
+  
   //TO DO: extra filter the check if captured email does not already exist in DB
 
   PrioSession.findOneAndUpdate({sessionPIN: req.body.sessionPIN},

@@ -45,8 +45,6 @@ class Backlog extends Component {
 
     showViewPopin = () => {
 
-        const storycardID = "Coucou"
-
         service.get((`/storycards/`))
             .then( (response) => {
                 this.setState({showViewPopin: !this.state.showViewPopin});
@@ -61,7 +59,8 @@ class Backlog extends Component {
     handleStoryCardsSubmit = () => {
         const selectedStoryCard = this.state.selectedStoryCard;
 
-        service.post(('/prioritizations/'), { selectedStoryCard })
+
+        service.post(('/prioritizations/'), { selectedStoryCard, project_id: this.props.match.params.id})
             .then( (response) => {
                 this.props.history.push(`/prioritizations/new/${response.data._id}`)
             })
@@ -76,7 +75,7 @@ class Backlog extends Component {
     render() {
         return(
             <div>
-                <Navbar />
+              <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
                 <div className='backlog'>
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>

@@ -6,10 +6,12 @@ class Homepage extends Component {
     return (
       <div className="homepage">
         <div className="homepage-section">
-          <nav>
-            <img alt="Sprintly."></img>
-            <Link className="homepage-link" to={"/login"}>Login</Link>
-            <Link className="blue-btn" to={"/signup"}>Sign up</Link>
+          <nav className="homepage-nav">
+            <img className="sprintly-logo" src={'/assets/sprintly-logo.png'} alt="Sprintly."></img>
+            <div className= "auth-btn-container">
+              <Link className="homepage-link" to={"/login"}>Login</Link>
+              <Link className="blue-btn" to={"/signup"}>Sign up</Link>
+            </div>
           </nav>
           <div className="homepage-container">
             <div>

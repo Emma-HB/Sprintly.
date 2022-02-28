@@ -98,19 +98,23 @@
 
 }
 
-.homepage-section nav {
+.homepage-nav {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 20px;
-  padding: 50px;
+  justify-content: space-between;
+  align-items:center;
+  padding: 30px 40px;
 }
 
-.homepage-section img {
-  flex: 1;
-  color: var(--dark-blue);
-  font-family: var(--title-font);
-  font-size: 120%;
+.sprintly-logo {
+  width: 15%;
+}
+
+.auth-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 35px;
+  margin-right: 20px;
 }
 
 .homepage-link {
@@ -118,6 +122,7 @@
   font-size: 80%;
   text-decoration: none;
   color: var(--dark);
+  padding: 0 30px;
 }
 
 .homepage h2 {
@@ -230,11 +235,6 @@
     DASHBOARD 
 */
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-}
-
 .dashboard {
   height: 100vh;
 }
@@ -244,12 +244,23 @@
   color: var(--dark);
 }
 
+
+/* 
+    NAVBAR
+*/
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .sprintly-icon {
   margin: 10px 40px;
   width: 50%;
 }
 
 .logout-icon {
+  margin-right: 20px;
   width: 5%;
 }
 

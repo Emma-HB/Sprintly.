@@ -55,9 +55,9 @@ class Dashboard extends Component {
           
           <div className="left-menu">
             <h1>{this.state.username}</h1>
-            <button className='left-menu-link' onClick={(e) => {this.displayProjects(e)}}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Projects</h2></button>
+            <button className='left-menu-link' onClick={(e) => {this.displayProjects(e)}}><img className="left-menu-icon" src={'/assets/allprojects-icon.png'} alt="logout icon"/><h2>All Projects</h2></button>
 
-            <button className='left-menu-link' onClick={(e) => {this.displayPrios(e)}}><img className="left-menu-icon" src={'/assets/Logout.png'} alt="logout icon"/><h2>All Prioritizations</h2></button>
+            <button className='left-menu-link' onClick={(e) => {this.displayPrios(e)}}><img className="left-menu-icon" src={'/assets/allprioritization-icon.png'} alt="logout icon"/><h2>All Prioritizations</h2></button>
           </div>
           
           <aside className="list">
