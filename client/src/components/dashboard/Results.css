@@ -1,0 +1,77 @@
+/* 
+    RESULTS
+*/
+
+.participants-list {
+  padding-top: 30px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.results-title {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.prioritization-submit > img {
+  width: 40px;
+}
+
+.prioritization-submit {
+  margin: 10px 40px 40px 70px;
+  transform: none;
+  width: 100px;
+  font-size: 12px;
+  padding: 0 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.participants-list h3 {
+  color: var(--dark-grey);
+  font-family: var(--title-font);
+  font-size: 16px;
+  /* text-align: start; */
+  /* margin-left: 20px; */
+  margin-bottom: 40px;
+}
+
+.participant-number > div {
+  text-align: center;
+  font-family: var(--title-font);
+  font-size: 18px;
+  color: var(--dark-blue);
+}
+
+.participant-number p {
+  color: var(--dark-grey);
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.participant-result-link  {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--light-background);
+  border-radius: var(--small-radius);
+  width: 300px;;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.participant-result-link:hover {
+  background-color: var(--main-background);
+}
+
+.participant-result-link > img {
+  width: 70px;
+}
+
+
+

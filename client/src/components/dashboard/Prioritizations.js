@@ -34,7 +34,7 @@ class Prioritizations extends Component {
                 <p className="title-container">
                   <p> {el.project_id.title}   |</p>
                   <Link to={`/prioritizations/${el._id}`} className="link"><h3>Priorization {index + 1}</h3></Link>
-                  <p>du {date}</p>
+                  <p>of {date}</p>
                 </p>
                 <p className="session-pin">PIN: {el.sessionPIN}</p>
                 <button className="blue-btn">Export Results<img className="export-icon"src={'/assets/export-logo.png'} alt="export" /></button>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import service  from '../auth/auth-service';
+import service, { logout }  from '../auth/auth-service';
+import './Results.css'; 
 
 import Navbar from '../Navbar'
 
@@ -60,32 +61,27 @@ export default class Results extends Component {
       <>
         <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
 
-        <div className="participant">
-          <div className="participant-section">
+        <div className="participant result">
+          <div className="participant-section result">
 
-            <div><button className='prioritization-submit blue-btn' onClick={() => this.handleSubmit()}>Export results</button></div>
+
 
             <div className="prioritization-container">
-              <div className="drag-column">
-                <div>
-                  <div>
+              <div className="drag-column participants-list">
+                  <div className="results-title">
+                    <h3>Prioritization of {this.state.date}</h3>
                     <div>
-                      <div>{this.state.results.length}</div>
-                      <div>Users who entered prioritization session</div>
+                    <button className='prioritization-submit blue-btn' onClick={() => this.handleSubmit()}>Export results<img className="export-icon"src={'/assets/export-logo.png'} alt="export" /></button>
                     </div>
-                    {/* <div>
-                      <div>XXXX</div>
-                      <div>Users who validate their prioritization</div>
-                    </div> */}
                   </div>
-                  <div>Participants results</div>
-                  <div>Prioritization of {this.state.date}</div>
-                </div>
+                  <div className="participant-number">
+                    <div>{this.state.results.length}</div>
+                    <p>Users who entered prioritization session</p>
+                  </div>
+
                 {this.state.results.map((el, index) => {
-                  return (
-                    <div>
-                    <button onClick={(e) => {this.getParticipantResult(e)}} type="submit" value={`${el.participant_name}`}>{el.participant_name}</button>
-                    </div>
+                  return (                    
+                    <button className="participant-result-link" onClick={(e) => {this.getParticipantResult(e)}} type="submit" value={`${el.participant_name}`}><img src={'/assets/user-logo.png'} alt="participant-icon" /><p>{el.participant_name}</p></button>           
                   )
                 })}
               </div>
