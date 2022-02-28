@@ -181,11 +181,19 @@ const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, c
   return (
     (!isSpacer) 
     ? <div className={`draggable-container ${dragging}`} ref={ref}>
-      <p>{summary}</p>
-      <p>{epic}</p>
-      <p>{priority}</p>
-      <p>{estimation}</p>
-      <p>{external_id}</p>
+        <div>
+          <h3>{summary}</h3>
+        </div>
+        <div className="infos-SC-wrapper">
+          <div>
+            <p className="epic">Epic: <span>{epic}</span></p>
+            <div className="infos-SC">
+              <p>Priority: <span>{priority}</span></p>
+              <p>Estimation: <span>{estimation}</span></p>
+            </div>
+          </div>
+          <h4>ID: {external_id}</h4>                            
+        </div>
     </div>
     : <div className="drop-target-container" ref={ref}><p>Drop a card here</p></div>
   )

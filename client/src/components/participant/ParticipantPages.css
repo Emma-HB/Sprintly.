@@ -42,6 +42,9 @@
   display: flex;
   justify-content: space-between;
 }
+.welcome-popin label {
+  margin: 5px 25px;
+}
 
 .welcome-popin input {
   width: 250px;
@@ -52,6 +55,7 @@
 
 .welcome-popin-btn {
   margin: 40px auto 20px;
+  padding: 12px 45px;
   border: none;
   border-radius: var(--small-radius);
 }
@@ -62,7 +66,7 @@
 }
 
 .prioritization-container {
-  height: 84vh;
+  min-height: 84vh;
   display: flex;
   justify-content: space-around;
 }
@@ -92,16 +96,60 @@
   overflow: auto;
 }
 
+/* 
+    DRAGGABLE STORYCARDS
+*/
 
 .draggable-container {
   list-style: none;
-  background-color: var(--main-background);
+  background-color: var(--light-background);
   color: var(--dark-grey);
   border-radius: var(--small-radius);
-  /* box-shadow: 0px 0px 44px rgba(0, 0, 0, 0.1); */
-  padding: 2px 15px;
+  padding: 2px 25px;
   margin-top:  10px;
+
   cursor: move;
+}
+
+.draggable-container h3 {
+  color: var(--main-blue);
+  font-family: var(--title-font);
+  font-size: 16px;
+}
+
+.draggable-container h4 {
+  color: var(--dark-grey);
+  font-size: 14px;
+  background-color: rgba(211, 211, 211, 0.4);
+  border-radius: var(--small-radius);
+  padding: 5px 8px;
+  margin-bottom: 14px;
+}
+
+.draggable-container p {
+  color: var(--mid-grey);
+  width: 130px;
+  margin-right: 1vw;
+  margin-top: 5px;
+}
+
+.draggable-container .epic {
+  margin: 0;
+}
+
+.draggable-container span {
+  color: var(--dark-grey);
+}
+
+.infos-SC-wrapper {
+  display:flex;
+  justify-content: space-between;
+  align-items:flex-end;
+}
+
+.infos-SC {
+  display: flex;
+  justify-content: space-between;
 }
 
 .drop-target-container {
@@ -112,11 +160,11 @@
   border-radius: var(--small-radius);
   border: var(--dashed-border);
   text-align: center;
-  padding: 70px 0;
+  padding: 35px 0;
 }
 
 .background-warning {
-  background-color: var(--light-background);
+  background-color:rgba(251, 251, 251, 0.2);
   border: var(--dashed-border);
 }
 

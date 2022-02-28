@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import service, { logout }  from '../auth/auth-service';
+import service  from '../auth/auth-service';
 import './Results.css'; 
 
 import Navbar from '../Navbar'
@@ -90,11 +90,19 @@ export default class Results extends Component {
                     return (
                       <div>
                         <div className="draggable-container">
-                            <p>{el.summary}</p>
-                            <p>{el.epic}</p>
-                            <p>{el.priority}</p>
-                            <p>{el.estimation}</p>
-                            <p>{el.external_id}</p>
+                            <div>
+                              <h3>{el.summary}</h3>
+                            </div>
+                            <div className="infos-SC-wrapper">
+                              <div>
+                                <p className="epic">Epic: <span>{el.epic}</span></p>
+                                <div className="infos-SC">
+                                  <p>Priority: <span>{el.priority}</span></p>
+                                  <p>Estimation: <span>{el.estimation}</span></p>
+                                </div>
+                              </div>
+                              <h4>ID: {el.external_id}</h4>                            
+                            </div>
                         </div>
                       </div>
                     )
