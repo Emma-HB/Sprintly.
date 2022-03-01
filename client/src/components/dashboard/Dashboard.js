@@ -5,10 +5,12 @@ import Navbar from '../Navbar';
 import Projects from './Projects';
 import NewProject from './NewProject';
 import Prioritizations from './Prioritizations';
+import Homepage from '../Homepage';
 
 class Dashboard extends Component {
 
   state = {
+    user: this.props.updateUser,
     username: '',
     showPopin: false,
     showProjects: true,
@@ -48,6 +50,7 @@ class Dashboard extends Component {
 
   render() {
     return (
+      (this.state.username) ?
       <div className="dashboard">
         <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
 
@@ -74,6 +77,8 @@ class Dashboard extends Component {
 
         </div>
       </div>
+
+      : <Homepage />
     )
   }
 }

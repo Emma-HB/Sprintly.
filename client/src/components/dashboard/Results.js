@@ -63,9 +63,6 @@ export default class Results extends Component {
 
         <div className="participant result">
           <div className="participant-section result">
-
-
-
             <div className="prioritization-container">
               <div className="drag-column participants-list">
                 <div className="results-title">

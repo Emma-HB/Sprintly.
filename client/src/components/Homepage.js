@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Homepage extends Component {
+  state = {
+    user: this.props.user
+  }
+
   render() {
     return (
       <div className="homepage">
@@ -9,7 +13,10 @@ class Homepage extends Component {
           <nav className="homepage-nav">
             <img className="sprintly-logo" src={'/assets/sprintly-logo.png'} alt="Sprintly."></img>
             <div className= "auth-btn-container">
-              <Link className="homepage-link" to={"/login"}>Login</Link>
+              {!this.state.user  
+                ? <Link className="homepage-link" to={"/login"}>Login</Link>
+                : <Link className="homepage-link" to={"/dashboard"}>Login</Link>
+              }
               <Link className="blue-btn" to={"/signup"}>Sign up</Link>
             </div>
           </nav>
