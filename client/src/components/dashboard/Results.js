@@ -85,11 +85,11 @@ export default class Results extends Component {
                   )
                 })}
               </div>
-              <div className="drop-column">
+              <div className="drop-column-results">
                   {this.state.participant_SC.map(el => {
                     return (
                       <div>
-                        <div className="draggable-container">
+                        <div className="draggable-container results">
                             <div>
                               <h3>{el.summary}</h3>
                             </div>

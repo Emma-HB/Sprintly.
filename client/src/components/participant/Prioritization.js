@@ -98,9 +98,11 @@ const Container = ({cards, participant_email, prioSessionId}) => {
       .catch( error => console.log(error) )
   }
 
+  const blur = popin ?  "blur" : null;
+
   return (
     <div className="participant">
-      <div className="participant-section">
+      <div className={`participant-section ${blur}`}>
         <div className="prioritization-container">
           {columns.map(column => (
               <Column
@@ -129,13 +131,13 @@ const Container = ({cards, participant_email, prioSessionId}) => {
         </div>
 
         <div><button className='prioritization-submit blue-btn' onClick={() => handleSubmit()}>Submit</button></div>
-
-        {popin &&
-          <div className="popin-background">
-            <div className="new-project-popin">Thanks you for your time !</div>
-          </div>
-        }
       </div>
+
+      {popin &&
+        <div className="sucess-popin-background">
+          <div className="sucess-popin">Thanks you for your time !</div>
+        </div>
+      }
     </div>
   )
 }
