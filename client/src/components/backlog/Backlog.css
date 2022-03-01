@@ -125,11 +125,11 @@
     width: 280px,
 }
 
-.storycard-item > input, textarea, select {
+.storycard-item > input, textarea, select, p {
     margin-top: 5px;
 }
 
-.storycard-item > input {
+.storycard-item > input, p {
     height: 20px;
     padding: 8px;
     border-radius: var(--small-radius);

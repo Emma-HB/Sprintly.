@@ -35,7 +35,6 @@ class Backlog extends Component {
 
         service.get((`/storycards?project_id=${this.props.match.params.id}`))
             .then (responseFromAPI => {
-                console.log("Regarder responseFromAPI", responseFromAPI)
                 this.setState({
                     listOfStoryCards: responseFromAPI.data
                 })
@@ -124,7 +123,7 @@ class Backlog extends Component {
                                             <td><button onClick={this.showViewPopin}>{storycard.external_id}</button>
                                             <ViewStoryCard 
                                                 trigger = {this.state.showViewPopin} 
-                                                storycardID = {this.state.storycardID} />
+                                                storycardID = {storycard._id} />
                                             </td>
                                             <td>{storycard.epic}</td>
                                             <td>{storycard.summary}</td>
