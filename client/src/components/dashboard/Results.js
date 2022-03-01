@@ -68,12 +68,12 @@ export default class Results extends Component {
 
             <div className="prioritization-container">
               <div className="drag-column participants-list">
-                  <div className="results-title">
-                    <h3>Prioritization of {this.state.date}</h3>
-                    <div>
-                    <button className='prioritization-submit blue-btn' onClick={() => this.handleSubmit()}>Export results<img className="export-icon"src={'/assets/export-logo.png'} alt="export" /></button>
-                    </div>
+                <div className="results-title">
+                  <h3>Prioritization of {this.state.date}</h3>
+                  <div>
+                    <button className='export-results-btn blue-btn' onClick={() => this.handleSubmit()}>Export results<img className="export-results-icon"src={'/assets/export-logo.png'} alt="export" /></button>
                   </div>
+                </div>
                   <div className="participant-number">
                     <div>{this.state.results.length}</div>
                     <p>Users who entered prioritization session</p>

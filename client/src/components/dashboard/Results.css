@@ -13,30 +13,30 @@
   padding: 0;
   display: flex;
   align-items: center;
+
+  margin: 20px 0 40px;
 }
 
-.prioritization-submit > img {
+.export-results-icon {
   width: 40px;
 }
 
-/* .prioritization-submit {
-  margin: 10px 40px 40px 70px;
-  transform: none;
-  width: 100px;
-  font-size: 12px;
-  padding: 0 70px;
+.export-results-btn {
+  font-size: 10px;
+  padding: 0 14px;
+  width: 145px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-} */
+  justify-content: flex-start;
+  white-space: nowrap;
+}
 
 .participants-list h3 {
   color: var(--dark-grey);
   font-family: var(--title-font);
   font-size: 16px;
-  /* text-align: start; */
-  /* margin-left: 20px; */
-  margin-bottom: 40px;
+  margin-right: 30px;
 }
 
 .participant-number > div {
@@ -72,6 +72,3 @@
 .participant-result-link > img {
   width: 70px;
 }
-
-
-
