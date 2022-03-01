@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import service  from '../auth/auth-service';
 import './Results.css'; 
 
@@ -66,6 +67,7 @@ export default class Results extends Component {
             <div className="prioritization-container">
               <div className="drag-column participants-list">
                 <div className="results-title">
+                  <Link className="menu-link" to={'/dashboard'}><img className="menu-icon" src={'/assets/back-icon.png'} alt="menu-icon"/></Link>
                   <h3>Prioritization of {this.state.date}</h3>
                   <div>
                     <button className='export-results-btn blue-btn' onClick={() => this.handleSubmit()}>Export results<img className="export-results-icon"src={'/assets/export-logo.png'} alt="export" /></button>
