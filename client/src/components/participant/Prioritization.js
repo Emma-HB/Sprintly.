@@ -3,6 +3,7 @@ import { useState, useRef, Component } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 
 import service  from '../auth/auth-service'; 
+import ViewStoryCard from './ViewStoryCard';
 
 export default class Prioritization extends Component {
 
@@ -86,6 +87,16 @@ const Container = ({cards, participant_email, prioSessionId}) => {
     console.log('prioStoryCard', columns[1].cardIds)
   };
 
+  const [viewPopin, setViewPopin] = useState(false);
+  const showViewPopin = () => {
+    service.get((`/storycards/`))
+        .then( (response) => {
+          console.log("test", response)
+          setViewPopin(true)
+        })
+        .catch( error => console.log(error) )
+  }
+
   //Display a popin when the partipant has submitted his prioritization
   const [popin, setPopin] = useState(false);
 
@@ -123,6 +134,7 @@ const Container = ({cards, participant_email, prioSessionId}) => {
                 {column.cardIds.length === 0 && (
                   <DraggableCard
                     isSpacer
+                    showViewPopin={showViewPopin}
                     moveCard={cardId => moveCard(cardId, column.id, 0)}
                   />
                 )}
@@ -132,6 +144,13 @@ const Container = ({cards, participant_email, prioSessionId}) => {
 
         <div><button className='prioritization-submit blue-btn' onClick={() => handleSubmit()}>Submit</button></div>
       </div>
+
+      {viewPopin &&
+        <div className="sucess-popin-background">
+          {/* <ViewStoryCard 
+            storycardID = {storycard._id} /> */}
+        </div>
+      }
 
       {popin &&
         <div className="sucess-popin-background">
@@ -153,7 +172,7 @@ const Column = ({ title, className, children }) => {
 };
 
 //Card component
-const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, columnId, columnIndex, moveCard, isSpacer }) => {
+const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, columnId, columnIndex, moveCard, isSpacer, showViewPopin }) => {
   const ref = useRef(null)
 
   //Dragging
@@ -180,6 +199,7 @@ const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, c
   connectDrag(ref)
   connectDrop(ref)
 
+
   return (
     (!isSpacer) 
     ? <div className={`draggable-container ${dragging}`} ref={ref}>
@@ -194,7 +214,8 @@ const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, c
               <p>Estimation: <span>{estimation}</span></p>
             </div>
           </div>
-          <h4>ID: {external_id}</h4>                            
+          {/* VOIR SI POSSIBLE D'AJOUTER LE SUBMIT POUR RECUPERER STORYCARD ID */}
+          {/* <button onClick={() => showViewPopin()}><h4>{external_id}</h4></button> */}
         </div>
     </div>
     : <div className="drop-target-container" ref={ref}><p>Drop a card here</p></div>

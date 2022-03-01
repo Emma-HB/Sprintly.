@@ -7,7 +7,7 @@ import './Backlog.css';
 import Navbar from '../Navbar';
 import NewStorycard from './NewStorycards';
 import EditStoryCard from './EditStoryCard';
-import ViewStoryCard from './ViewStoryCard';
+import ViewStoryCard from '../participant/ViewStoryCard';
 
 
 class Backlog extends Component {
@@ -42,14 +42,7 @@ class Backlog extends Component {
             .catch(err => console.log('Error while fetching your Story Cards', err))
     }
 
-    showViewPopin = () => {
 
-        service.get((`/storycards/`))
-            .then( (response) => {
-                this.setState({showViewPopin: !this.state.showViewPopin});
-            })
-            .catch( error => console.log(error) )
-    }
     
     showEditPopin = () => {
         this.setState({showEditPopin: !this.state.showEditPopin});
