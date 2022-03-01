@@ -42,6 +42,9 @@ class Backlog extends Component {
             .catch(err => console.log('Error while fetching your Story Cards', err))
     }
 
+    // showViewPopin = () => {
+    //     this.setState({showViewPopin: !this.state.showViewPopin});
+    // }
 
     
     showEditPopin = () => {
@@ -113,11 +116,17 @@ class Backlog extends Component {
                                                     this.state.selectedStoryCard.splice(this.state.selectedStoryCard.findIndex(storyCard => storyCard === storycard._id), 1)
                                                 }
                                             }}/></td>
-                                            <td><button onClick={this.showViewPopin}>{storycard.external_id}</button>
+                                            <td><button onClick={this.showEditPopin}>{storycard.external_id}</button>
+                                            <EditStoryCard 
+                                                trigger = {this.state.showEditPopin} 
+                                                storycardID = {storycard._id} />
+                                            </td>
+
+                                            {/* <td><button onClick={this.showViewPopin}>{storycard.external_id}</button>
                                             <ViewStoryCard 
                                                 trigger = {this.state.showViewPopin} 
                                                 storycardID = {storycard._id} />
-                                            </td>
+                                            </td> */}
                                             <td>{storycard.epic}</td>
                                             <td>{storycard.summary}</td>
                                             <td>{storycard.status}</td>
