@@ -35,6 +35,7 @@
     margin-left: 10px;
     align-self: center;
     width: 220px;
+    cursor: pointer;
 }
 
 .backlog h3 {
@@ -50,6 +51,8 @@
 }
 
 .backlog-table > table > thead {
+    font-family: var(--title-font);
+    font-size: 12px;
     background-color: var(--main-blue);
     color: var(--white);
     height: 40px;
@@ -57,6 +60,7 @@
 
 .backlog-table > table > tbody > tr >td {
     padding: 5px 8px;
+    font-size: 0.95rem;
 }
 
 .backlog-table > table > tbody > tr > td:nth-child(1) {
@@ -71,6 +75,21 @@
     height: 20px;
 }
 
+.backlog-table > table > tbody > tr > td > button  {
+    background: rgba(211, 211, 211, 0.4);
+	color: var(--dark-grey);
+    font-size: 12px;
+	border: 2px solid var(--mid-grey);
+    border-radius: var(--small-radius);
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    padding: 5px 8px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
 .table-col-small {
     width: 50px;
 }
@@ -84,74 +103,10 @@
 }
 
 /* 
-    NEW STORY CARD POPIN 
-*/
-.form {
-    display: flex;
-    flex-direction: column;
-}
-
-.popin-background {
-    backdrop-filter: blur(10px);
-    width: 100%;
-}
-
-.new-storycard-popin {
-    background-color: var(--white);
-    border: var(--blue-border);
-    border-radius: var(--small-radius);
-    width: 600px;
-    margin: 100px auto;
-    padding: 10px 30px;
-    color: var(--main-blue);
-    display: flex;
-    flex-direction: column;
-    font-family: var(--title-font);
-}
-
-.storycard-item {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 30px;
-    font-size: 0.75rem;
-}
-
-.storycard-priorityAndStoryPoints {
-    display: flex;
-    justify-content: space-between;
-}
-
-.storycard-priority > select {
-    width: 280px,
-}
-
-.storycard-item > input, textarea, select, p {
-    margin-top: 5px;
-}
-
-.storycard-item > input {
-    height: 20px;
-    padding: 8px;
-    border-radius: var(--small-radius);
-    border: var(--grey-border)
-}
-
-.storycard-item > textarea {
-    padding: 8px;
-    height: 100px ;
-    border-radius: var(--small-radius);
-    border: var(--grey-border);
-}
-
-.storycard-cta > input {
-    margin-right: 10px;
-}
-
-/* 
-    EDIT STORY CARD POPIN 
+    STORY CARD POPIN (NEW and EDIT)
 */
 
-.popinEdit-background {
+.popinCard-background {
     position: fixed;
     top: 0;
     left: 0;
@@ -162,13 +117,77 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: scroll;
+
 }
 
-.popinEdit-inner {
+.popinCard-inner {
     position: relative;
     background-color: white;
+    border: var(--blue-border);
+    border-radius: var(--small-radius);
+    top: 10vh;
     padding: 32px;
     width: 100%;
     max-width: 640px;
-
+    margin: 100px 0px;
 } 
+
+.popinCard-inner > h3 {
+    margin-top: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.storycard-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-family: var(--title-font);
+    font-size: 0.75rem;
+}
+
+.storycard-item > label {
+    padding-left: 5px;
+}
+
+.storycard-priorityAndStoryPoints {
+    display: flex;
+    justify-content: space-between;
+}
+
+.storycard-priority > select {
+    height: 35px;
+}
+
+.storycard-item > input, textarea, select, p {
+    margin-top: 5px;
+}
+
+.storycard-item > input, select {
+    height: 20px;
+    padding: 8px;
+    border-radius: var(--small-radius);
+    border: var(--grey-border)
+}
+
+.storycard-item > textarea {
+    padding: 8px;
+    height: 150px ;
+    border-radius: var(--small-radius);
+    border: var(--grey-border);
+    font-family: var(--main-font);
+}
+
+.storycard-cta {
+    margin: 25px 0;
+}
+
+.storycard-cta > input {
+    margin-right: 10px;
+}
+
