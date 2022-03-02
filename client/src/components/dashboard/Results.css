@@ -87,3 +87,7 @@
 .participant-result-link > img {
   width: 70px;
 }
+
+.participant-result-link > p {
+  margin: auto 0;
+}

@@ -130,10 +130,38 @@
   cursor: auto;
 }
 
+.draggable-title-container {
+  display: flex;
+  align-items: center;
+}
+
 .draggable-container h3 {
   color: var(--main-blue);
   /* font-family: var(--title-font); */
   font-size: 16px;
+  text-align:justify;
+}
+
+.view-description {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0; margin-top: 5px;
+  color: var(--mid-grey);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.view-description:hover {
+  color: var(--dark-grey);
+}
+
+.view-description img {
+  width: 40px;
+}
+
+.description-SC-container {
+  margin-bottom: 20px;
 }
 
 .draggable-container h4 {
@@ -147,7 +175,7 @@
 
 .draggable-container p {
   color: var(--mid-grey);
-  width: 130px;
+  width: 150px;
   margin-right: 1vw;
   margin-top: 5px;
 }
