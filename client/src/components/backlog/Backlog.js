@@ -7,7 +7,7 @@ import './Backlog.css';
 import Navbar from '../Navbar';
 import NewStorycard from './NewStorycards';
 import EditStoryCard from './EditStoryCard';
-import ViewStoryCard from '../participant/ViewStoryCard';
+// import ViewStoryCard from '../participant/ViewStoryCard';
 
 
 class Backlog extends Component {
@@ -16,9 +16,9 @@ class Backlog extends Component {
         projectName : "",
         listOfStoryCards : [], 
         selectedStoryCard: [],
-        viewStoryCard: "",
-        showEditPopin: false,
-        showViewPopin: false,
+        showCreatePopin: false,
+        showEditPopin: -1,
+        // showViewPopin: false,
     };
 
     getProjectName = () => {
@@ -35,6 +35,7 @@ class Backlog extends Component {
 
         service.get((`/storycards?project_id=${this.props.match.params.id}`))
             .then (responseFromAPI => {
+                console.log("Check response", responseFromAPI)
                 this.setState({
                     listOfStoryCards: responseFromAPI.data
                 })
@@ -42,13 +43,16 @@ class Backlog extends Component {
             .catch(err => console.log('Error while fetching your Story Cards', err))
     }
 
+    showCreatePopin = () => {
+        this.setState({showCreatePopin: !this.state.showCreatePopin});
+    }
+
     // showViewPopin = () => {
     //     this.setState({showViewPopin: !this.state.showViewPopin});
     // }
 
-    
-    showEditPopin = () => {
-        this.setState({showEditPopin: !this.state.showEditPopin});
+    showEditPopin = (num) => {
+        this.setState({showEditPopin: num});
     }
 
     handleStoryCardsSubmit = () => {
@@ -68,18 +72,26 @@ class Backlog extends Component {
     }
 
     render() {
+        const prioActive = this.state.selectedStoryCard.length > 1
+        //console.log('prioActive', prioActive)
+
         return(
             <div>
               <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
                 <div className='backlog'>
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>
-                            <Link className="blue-btn" to={`/storycards/new?project_id=${this.props.match.params.id}`}>+ Create Story Card</Link>
+                            <button className="blue-btn" onClick={this.showCreatePopin}>+ Create Story Card</button>
+                            <NewStorycard 
+                            trigger = {this.state.showCreatePopin}
+                            projectID = {this.props.match.params.id} 
+                            />
+                            {/* <Link className="blue-btn" to={`/storycards/new?project_id=${this.props.match.params.id}`}>+ Create Story Card</Link> */}
                             <Link className="import-btn" to={"/storycards/import"}>+ Import from CSV</Link>
                         </div>
                         <div className='workWithStoryCards'>
                             <button 
-                            className={this.state.selectedStoryCard.length > 1 ? 'blue-secondary-btn' : 'grey-btn'}
+                            className={prioActive ? 'blue-secondary-btn' : 'grey-btn'}
                             onClick={this.handleStoryCardsSubmit}>Launch Prioritisation</button>
                             <button className="grey-btn">Start Planning</button>
                         </div>
@@ -93,7 +105,9 @@ class Backlog extends Component {
                         <table>
                             <thead>
                                 <tr>
-                                    <th className='table-col-small'><input type="checkbox" name="Select All" /></th>
+                                    <th className='table-col-small'>
+                                        {/* <input type="checkbox" name="Select All" /> */}
+                                    </th>
                                     <th className='table-col-small'>ID</th>
                                     <th className='table-col-medium'>Epic</th>
                                     <th className='table-col-large'>Summary</th>
@@ -105,21 +119,30 @@ class Backlog extends Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {this.state.listOfStoryCards.map( storycard => {
+                                {this.state.listOfStoryCards.map( (storycard, index) => {
                                     return(
                                         <tr key={storycard._id}>
                                             <td><input type="checkbox" name="Select" onClick={(e) => {
-                                                console.log("Count checkboxes1", this.state.selectedStoryCard )
+                                                console.log("Count checkboxes1", e.target.checked )
                                                 if(e.target.checked === true ) {
-                                                    this.state.selectedStoryCard.push(storycard._id)
+                                                    console.log('add')
+                                                    this.setState({selectedStoryCard : [...this.state.selectedStoryCard, storycard._id]})
+                                                    // this.state.selectedStoryCard.push(storycard._id) // NONNNNNNN: mutation 
                                                 } else {
-                                                    this.state.selectedStoryCard.splice(this.state.selectedStoryCard.findIndex(storyCard => storyCard === storycard._id), 1)
+                                                    console.log('rm')
+                                                    const arrayselectedStoryCard = [...this.state.selectedStoryCard]
+                                                    arrayselectedStoryCard.splice(arrayselectedStoryCard.findIndex(storyCard => storyCard === storycard._id), 1)
+                                                    this.setState({selectedStoryCard : arrayselectedStoryCard})
+                                                    // this.state.selectedStoryCard.splice(this.state.selectedStoryCard.findIndex(storyCard => storyCard === storycard._id), 1) // NONNNNNNN: mutation 
                                                 }
+                                                console.log('selectedStoryCard', this.state.selectedStoryCard)
                                             }}/></td>
-                                            <td><button onClick={this.showEditPopin}>{storycard.external_id}</button>
+                                            <td><button onClick={(e) => this.showEditPopin(index)}>{storycard.external_id}</button>
                                             <EditStoryCard 
-                                                trigger = {this.state.showEditPopin} 
-                                                storycardID = {storycard._id} />
+                                                trigger = {this.state.showEditPopin === index}
+                                                hideEditPopin={this.showEditPopin}
+                                                storycardID = {storycard._id}
+                                                projectID = {storycard.project_id} />
                                             </td>
 
                                             {/* <td><button onClick={this.showViewPopin}>{storycard.external_id}</button>
@@ -144,7 +167,6 @@ class Backlog extends Component {
                     </div>
                 </div>
                 <div>
-                <NewStorycard getData={() => this.getAllStoryCards()}/>
                 </div>
                 
                 

@@ -44,7 +44,7 @@ class ViewStoryCard extends Component {
             </div>
             <div className='storycard-summary storycard-item'>
               <label>Summary:</label>
-							<p>{this.state.summary}</p>
+			    <p>{this.state.summary}</p>
             </div>
             <div className='storycard-externalid storycard-item'>
               <label>External ID:</label>
