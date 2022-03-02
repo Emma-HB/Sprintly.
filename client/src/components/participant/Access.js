@@ -5,7 +5,7 @@ export default class Access extends Component {
     return (
       <div className="welcome-section">
         <div className="welcome-popin">
-          <p>Welcome on Sprintly,your favorite tool to share your business expectation ! 🎉🎉🎉</p>
+          <p>Welcome on Sprintly, your favorite tool to share your business expectation ! 🎉🎉🎉</p>
 
           <form onSubmit={this.props.handleSubmit}>
             <div>
