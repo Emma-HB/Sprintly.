@@ -16,6 +16,7 @@ class Backlog extends Component {
         projectName : "",
         listOfStoryCards : [], 
         selectedStoryCard: [],
+        deleteStoryCard: "",
         showCreatePopin: false,
         showEditPopin: -1,
         // showViewPopin: false,
@@ -35,6 +36,7 @@ class Backlog extends Component {
 
         service.get((`/storycards?project_id=${this.props.match.params.id}`))
             .then (responseFromAPI => {
+                console.log("Check on props", this.props)
                 console.log("Check response", responseFromAPI)
                 this.setState({
                     listOfStoryCards: responseFromAPI.data
@@ -64,6 +66,16 @@ class Backlog extends Component {
                 this.props.history.push(`/prioritizations/new/${response.data._id}`)
             })
             .catch( error => console.log(error) )
+    }
+
+    handleStoryCardsDelete = (storycard_id) => {
+
+        service.delete((`/storycards/${storycard_id}`))
+        .then( (deletedStoryCardFomDB) => {
+            console.log("Check on deletedStoryCardFomDB", deletedStoryCardFomDB)
+            window.location.reload(false);
+        })
+        .catch( error => console.log(error) )
     }
 
     componentDidMount() {
@@ -111,10 +123,10 @@ class Backlog extends Component {
                                     <th className='table-col-small'>ID</th>
                                     <th className='table-col-medium'>Epic</th>
                                     <th className='table-col-large'>Summary</th>
-                                    <th className='table-col-medium'>Status</th>
-                                    <th className='table-col-medium'>Priority</th>
+                                    <th className='table-col-small'>Status</th>
+                                    <th className='table-col-small'>Priority</th>
                                     <th className='table-col-small'>Points</th>
-                                    <th className='table-col-medium'>Sprint</th>
+                                    <th className='table-col-small'>Sprint</th>
                                     <th className='table-col-small'>Del.</th>
                                 </tr>
                             </thead>
@@ -156,11 +168,12 @@ class Backlog extends Component {
                                             <td>{storycard.priority}</td>
                                             <td>{storycard.estimation}</td>
                                             <td>{storycard.sprint_label}</td>
-                                            <td><img src={'/assets/trashIcon.png'} alt='Click to remove'/></td>
+                                            <td><button onClick={(e) => {this.handleStoryCardsDelete(storycard._id)}}>
+                                            <img src={'/assets/trashIcon.png'} alt='Click to remove'/>
+                                            </button></td>
                                         </tr>
                                     )
                                 })}
-                                
                             </tbody>
                         </table>
 
