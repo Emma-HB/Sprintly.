@@ -14,11 +14,13 @@ class NewProject extends Component {
     const title = this.state.title;
     const description = this.state.description;
 
-    service.post(('/projects'), { title, description})
-      .then( (response) => {
-        this.props.history.push(`/projects/${response.data._id}`)
-      })
-      .catch( error => console.log(error) )
+    if (title !== "") {
+      service.post(('/projects'), { title, description})
+        .then( (response) => {
+          this.props.history.push(`/projects/${response.data._id}`)
+        })
+        .catch( error => console.log(error) )
+    }
   }
 
   handleChange = (event) => {  

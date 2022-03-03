@@ -181,11 +181,9 @@ const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, c
   connectDrag(ref)
   connectDrop(ref)
 
-
-  const val = false;
-  const [viewPopin, setViewPopin] = useState(val);
+  const [viewPopin, setViewPopin] = useState(false);
   const showViewPopin = () => {
-    setViewPopin(!val)
+    setViewPopin(!viewPopin)
   }
 
   return (
