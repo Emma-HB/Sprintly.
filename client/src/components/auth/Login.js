@@ -26,27 +26,28 @@ class Login extends Component {
     
   render(){
     return(
-      <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Email:</label>
-          <input type="text" name="email" value={this.state.email} onChange={e => this.handleChange(e)}/>
-          
-          <label>Password:</label>
-          <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)}/>
-          
-          <button>Log in</button>
-        </form>
+      <div className="auth-wrapper">
+        <div className="auth-container">
+          <img src={'/assets/sprintly-logo.png'} alt="Sprintly."/>
+          <form onSubmit={this.handleFormSubmit}>
+            <label>Email:</label>
+            <input type="text" name="email" value={this.state.email} onChange={e => this.handleChange(e)} placeholder="Your email"/>
+            <label>Password:</label>
+            <input type="password" name="password" value={this.state.password} onChange={ e => this.handleChange(e)} placeholder="Your password"/>
+            <aside>
+            <Link className="auth-aside-link" to={"/"}>Forgot password?</Link>
+            </aside>
+            <button className="blue-btn auth-btn">Log in</button>
+          </form>
 
-        {this.state.errorMessage && (
-          <p className="error">{this.state.errorMessage}</p>
-        )}
+          {this.state.errorMessage && (
+            <p className="auth-error">{this.state.errorMessage}</p>
+          )}
 
-        <aside>
-          <Link to={"/"}>Forgot password?</Link>
-        </aside>
-        <p>Need an account? 
-          <Link to={"/signup"}>Sign up</Link>
-        </p>
+          <p className="auth-redirect">Need an account? 
+            <Link className="auth-redirect-link" to={"/signup"}>Sign up</Link>
+          </p>
+        </div>
       </div>
     )
   }

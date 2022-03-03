@@ -11,7 +11,7 @@
   background-color: var(--light-background);
   display: flex;
   font-family: var(--title-font);
-  color: var(--main-blue);
+  color: var(--dark-blue);
 }
 
 .welcome-popin {
@@ -53,8 +53,15 @@
   border: var(--grey-border);
 }
 
+.error {
+  color: var(--dark-grey);
+  font-size: 14px;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
 .welcome-popin-btn {
-  margin: 40px auto 20px;
+  margin: 30px auto 20px;
   padding: 12px 45px;
   border: none;
   border-radius: var(--small-radius);

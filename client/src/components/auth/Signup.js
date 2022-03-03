@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { signup } from './auth-service';
 import { Link } from 'react-router-dom';
+import './Auth.css'; 
 
 
 class Signup extends Component {
@@ -29,28 +30,27 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Name:</label>
-          <input type="text" name="username" value={this.state.username} onChange={e => this.handleChange(e)} />
-          
-          <label>Email:</label>
-          <input name="email" value={this.state.email} onChange={e => this.handleChange(e)} />
+      <div className="auth-wrapper">
+        <div className="auth-container">
+          <img src={'/assets/sprintly-logo.png'} alt="Sprintly."/>
+          <form onSubmit={this.handleFormSubmit}>
+            <label>Name:</label>
+            <input type="text" name="username" value={this.state.username} onChange={e => this.handleChange(e)} placeholder="Your name" />
+            <label>Email:</label>
+            <input name="email" value={this.state.email} onChange={e => this.handleChange(e)} placeholder="Your email" />
+            <label>Password:</label>
+            <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)} placeholder="Your password" />
+            <button className="blue-btn auth-btn" >Sign up</button>
+          </form>
 
-          <label>Password:</label>
-          <input type="password" name="password" value={this.state.password} onChange={e => this.handleChange(e)} />
-          
-          <button>Sign up</button>
-        </form>
-
-        {this.state.errorMessage && (
-          <p className="error">{this.state.errorMessage}</p>
-        )}
- 
-        <p>Already a user? 
-          <Link to={"/login"}>Login</Link>
-        </p>
- 
+          {this.state.errorMessage && (
+            <p className="auth-error">{this.state.errorMessage}</p>
+          )}
+  
+          <p className="auth-redirect">Already a user? 
+            <Link className="auth-redirect-link" to={"/login"}>Login</Link>
+          </p>
+        </div>      
       </div>
     )
   }

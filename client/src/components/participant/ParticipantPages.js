@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import service  from '../auth/auth-service'; 
+import { Link } from 'react-router-dom';
 
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import Prioritization from './Prioritization';
 import Access from './Access';
-import Navbar from '../Navbar';
 
 class ParticipantPages extends Component {
   state = {
@@ -42,8 +42,9 @@ class ParticipantPages extends Component {
   render () {
     return (
       <div className="participant">
-        <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
-
+        <div className="navbar">
+          <Link to={"/"}><img className="sprintly-icon" src={'/assets/sprintly-logo.png'}alt="Sprintly."></img></Link>
+        </div>
         {!this.state.prioSessionId 
         ? <Access
           handleSubmit={this.handleSubmit}

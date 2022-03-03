@@ -95,7 +95,7 @@
 .project-container > button {
   margin-top: 20px;
   margin-left: 60%;
-  padding: 8px 30px; 
+  padding: 10px 30px;
 }
 
 .project-link {
@@ -203,7 +203,6 @@
 .prio-list-container {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   background-color: var(--light-background);
   padding-left: 0;
   margin: 50px;
@@ -236,6 +235,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  min-width: 430px;
 }
 
 .prio-list p {
