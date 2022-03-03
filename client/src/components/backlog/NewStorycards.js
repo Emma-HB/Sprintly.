@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import service  from '../auth/auth-service'; 
 
-const queryString = require('query-string');
-
 
 class NewStorycard extends Component {
 
@@ -98,7 +96,6 @@ class NewStorycard extends Component {
           <div className='storycard-cta'>
             <input className='blue-btn' type="submit" value="Add Story Card" />
             <button className='grey-btn'>Cancel</button>
-            {/* onClick={this.handleCancel} */}
           </div>
         </form>
       </div>            
