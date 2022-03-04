@@ -2,7 +2,7 @@
     BACKLOG PAGE
 */
 
-.backlog {
+.full-page {
     background-color: var(--light-background);
     min-height: 100vh; 
     padding: 10px;
@@ -21,7 +21,7 @@
 
 .import-btn {
     font-family: var(--title-font);
-    color: var(--main-blue);
+    color: var(--mid-grey);
     font-size: 00.75rem;
     margin-top: 5px;
 }
@@ -38,13 +38,6 @@
     cursor: pointer;
 }
 
-.backlog h3 {
-    font-family: var(--title-font);
-    color: var(--main-blue);
-    font-size: 1.2rem;
-    margin-top: 50px;
-}
-
 .backlog-table > table {
     margin-top: 50px;
     width: 100%;
@@ -58,17 +51,20 @@
     height: 40px;
 }
 
-.backlog-table > table > tbody > tr >td {
-    padding: 5px 8px;
+.backlog-table > table > tbody > tr > td {
+    padding: 5px 0;
     font-size: 0.95rem;
-}
-
-.backlog-table > table > tbody > tr > td:nth-child(1) {
     text-align: center;
 }
 
-.backlog-table > table > tbody > tr > td:nth-child(9) {
-    text-align: center;
+.backlog-table > table > tbody > tr > td:nth-child(3)  {
+    text-align: left;
+    padding-left: 10px 
+}
+
+.backlog-table > table > tbody > tr > td:nth-child(4) {
+    text-align: left;
+    padding-left: 10px 
 }
 
 .backlog-table > table > tbody > tr > td > img {
@@ -82,17 +78,17 @@
 	border: 2px solid var(--mid-grey);
     border-radius: var(--small-radius);
 	padding: 0;
-	font: inherit;
+    font-family: var(--main-font);
 	cursor: pointer;
 	outline: inherit;
     padding: 5px 8px;
-    margin-bottom: 14px;
     text-align: center;
 }
 
 .backlog-table > table > tbody > tr > td > button > img {
     width: 15px; 
-    height: auto
+    height: auto;
+    margin: auto;
 }
 
 .table-col-small {
@@ -139,7 +135,11 @@
 } 
 
 .popinCard-inner > h3 {
-    margin-top: 30px;
+    font-family: var(--title-font);
+    color: var(--main-blue);
+    font-size: 1.2rem;
+    margin-top: 50px;
+    text-align: left;
 }
 
 .form {
@@ -158,6 +158,7 @@
 
 .storycard-item > label {
     padding-left: 5px;
+    text-align: left;
 }
 
 .storycard-priorityAndStoryPoints {
@@ -195,4 +196,64 @@
 .storycard-cta > input {
     margin-right: 10px;
 }
+
+/* 
+    PRIO LAUNCH PAGE
+*/
+
+.full-page-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15vh auto;
+
+    background-color: white;
+    border: var(--blue-border);
+    border-radius: var(--small-radius);
+    width: 75%;
+    padding: 10vh 5vh;
+
+    font-family: var(--title-font);
+    text-align: center;
+}
+
+.full-page-inner > img {
+    width: 40vh;
+    height: auto;
+    margin-right: 5vh;
+}
+
+.full-page-inner > aside > h5 {
+    color: var(--main-blue);
+}
+
+.full-page-inner > aside > div > h3 {
+    color: var(--main-blue);
+}
+
+.extra-space {
+    margin-bottom: 5vh;
+}
+
+/* 
+    CSV IMPORT PAGE
+*/
+
+.import-page-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15vh auto;
+
+    background-color: white;
+    border: var(--blue-border);
+    border-radius: var(--small-radius);
+    width: 75%;
+    padding: 10vh 5vh;
+
+    font-family: var(--title-font);
+    text-align: left;
+}
+
 

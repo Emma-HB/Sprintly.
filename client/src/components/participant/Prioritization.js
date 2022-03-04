@@ -136,7 +136,14 @@ const Container = ({cards, participant_email, prioSessionId}) => {
 
       {popin &&
         <div className="sucess-popin-background">
-          <div className="sucess-popin">Thanks you for your time !</div>
+          <div className="sucess-popin">
+          <h2>Your participation makes the success of our project</h2>
+          <h1>Thank You 🐰</h1>
+          <aside>
+            <p>Work session powered by</p>
+            <img src={'assets/sprintly-logo.png'} alt='Sprintly Logo'/>
+          </aside>
+          </div>
         </div>
       }
     </div>

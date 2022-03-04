@@ -90,12 +90,13 @@ class Backlog extends Component {
         return(
             <div>
               <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
-                <div className='backlog'>
+                <div className='full-page'>
                     <section className='backlog-btns'>
                         <div className='addStoryCards'>
                             <button className="blue-btn" onClick={this.showCreatePopin}>+ Create Story Card</button>
                             <NewStorycard 
                             trigger = {this.state.showCreatePopin}
+                            hideCreatePopin={this.showCreatePopin}
                             projectID = {this.props.match.params.id} 
                             />
                             {/* <Link className="blue-btn" to={`/storycards/new?project_id=${this.props.match.params.id}`}>+ Create Story Card</Link> */}

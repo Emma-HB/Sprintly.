@@ -32,20 +32,23 @@ class NewPrioritization extends Component {
     return(
       <div>
         <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
-        <div className='new-storycard-popin'>
-          <section>
-            <p>The session will happen here:</p>
-            <h5>https://sprintly-io.herokuapp.com/participant</h5>
-            {this.state.listOfPrioritizations.map( prioritization => {
-              return(
-                <div key={prioritization._id}>
-                <h3 >Session PIN: {prioritization.sessionPIN}</h3>
-                </div>
-              )
-            })}
-          
-            <p>🎉🎉🎉Happy Prioritization🎉🎉🎉</p>
-          </section>
+        <div className='full-page'>
+          <div className='full-page-inner '>
+            <img src={ '/assets/Illustration Prioritization.png' } alt='Illustration Prioritization'/>
+            <aside>
+              <p>Your session will happen here:</p>
+              <h5>https://sprintly-io.herokuapp.com/participant</h5>
+              {this.state.listOfPrioritizations.map( prioritization => {
+                return(
+                  <div key={prioritization._id}>
+                  <h3 >Session PIN: {prioritization.sessionPIN}</h3>
+                  </div>
+                )
+              })}
+              <p className="extra-space">🎉🎉🎉 Enjoy Prioritization with Sprintly.🎉🎉🎉</p>
+              <a className="blue-btn" href='/dashboard'>Back to Dashboard</a>
+            </aside>
+          </div>
         </div>
       </div>
   )

@@ -47,6 +47,11 @@ class EditStoryCard extends Component {
     .catch( error => console.log(error) )
   };
 
+  handleCancel = () => {
+    this.props.hideEditPopin(-1);
+    window.location.reload(false);
+  }
+
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
@@ -102,7 +107,7 @@ class EditStoryCard extends Component {
             
             <div className='storycard-cta'>
               <input className='blue-btn' type="submit" value="Update Story Card" />
-              <button className='grey-btn' onClick={e => this.props.hideEditPopin(-1)}>Cancel</button>
+              <button className='grey-btn' onClick={this.handleCancel}>Cancel</button>
             </div>
           </form>
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Backlog.css'; 
 
+import Navbar from '../Navbar';
+
+
 class StoryCardImport extends Component {
 
   state = {
@@ -20,9 +23,9 @@ class StoryCardImport extends Component {
   };
     render() {
         return(
-            <div className='popin-background'>
-              <div className='new-storycard-popin'>
-
+            <div className='full-page'>
+            <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
+              <div className='import-page-inner'>
                 <h3>CSV file upload</h3>
                 <p>To import Story Cards in bulk, you need to provide the data in a CSV file format.</p>
                 <p>Please use this <a href='/'>formatted CSV file</a> template.</p>
@@ -36,10 +39,10 @@ class StoryCardImport extends Component {
                     }}/>
                   </div>
                   <div className='storycard-cta'>
-                    <input className='blue-btn' type="submit" value="Upload" />
+                    <button className='blue-btn' onClick={this.handleFormSubmit}>Upload</button>
                     <button className='grey-btn'>Cancel</button>
                   </div>
-                  <button className='blue-btn' onClick={this.handleFormSubmit}>Upload</button>
+                  
                 </form>
 
               </div>            
