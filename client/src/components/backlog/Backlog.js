@@ -106,7 +106,7 @@ class Backlog extends Component {
                   <th className='table-col-small'>ID</th>
                   <th className='table-col-medium'>Epic</th>
                   <th className='table-col-large'>Summary</th>
-                  <th className='table-col-small'>Status</th>
+                  <th className='table-col-medium'>Status</th>
                   <th className='table-col-small'>Priority</th>
                   <th className='table-col-small'>Points</th>
                   <th className='table-col-small'>Sprint</th>

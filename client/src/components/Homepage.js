@@ -60,7 +60,7 @@ class Homepage extends Component {
               <img className="sprint-icon" src={'/assets/calendar-icon.png'} alt='sprint icon'/>
               <aside>
                 <h5>Run business oriented Sprint planning sessions</h5>
-                <p>Collectively orchestrate and push prioritized features into development Sprints, taking into consideration build effort and delivery windows reccurence.</p>
+                <p>Collectively orchestrate and push prioritized features into development Sprints, taking into consideration build effort and delivery windows recurrence.</p>
               </aside>
               </div>
             </div>
