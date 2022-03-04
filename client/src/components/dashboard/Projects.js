@@ -11,11 +11,12 @@ class Projects extends Component {
   //To display the list of projects
   getAllProjects = () => {
     service.get('/projects')
-    .then(response => {
-      this.setState({
-        projects: response.data
+      .then(response => {
+        this.setState({
+          projects: response.data
+        })
       })
-    })
+      .catch(error => console.log(error))
   }
 
   componentDidMount() {

@@ -19,13 +19,13 @@ class NewProject extends Component {
         .then( (response) => {
           this.props.history.push(`/projects/${response.data._id}`)
         })
-        .catch( error => console.log(error) )
+        .catch(error => console.log(error))
     }
   }
 
   handleChange = (event) => {  
-      const {name, value} = event.target;
-      this.setState({[name]: value});
+    const {name, value} = event.target;
+    this.setState({[name]: value});
   }
 
   render() {
@@ -43,7 +43,6 @@ class NewProject extends Component {
                   onChange={e => this.handleChange(e)}
                 />              
               </div>
-
               <div>
                 <label>Description: </label>
                 <textarea 

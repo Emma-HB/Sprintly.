@@ -12,11 +12,11 @@ class Prioritizations extends Component {
   getAllPrioritizations = () => {
     service.get('/prioritizations')
     .then(response => {
-      console.log(response.data)
       this.setState({
         prioritizations: response.data
       })
     })
+    .catch(error => console.log(error))
   }
 
   componentDidMount() {

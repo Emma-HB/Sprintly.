@@ -53,31 +53,23 @@ class Dashboard extends Component {
       (this.state.username) ?
       <div className="dashboard">
         <Navbar updateUser={this.props.updateUser} history={this.props.history}/>
-
         <div className="dashboard-section">
-          
           <div className="left-menu">
             <h1>{this.state.username}</h1>
             <button className='left-menu-link' onClick={(e) => {this.displayProjects(e)}}><img className="left-menu-icon" src={'/assets/allprojects-icon.png'} alt="logout icon"/><h2>All Projects</h2></button>
-
             <button className='left-menu-link' onClick={(e) => {this.displayPrios(e)}}><img className="left-menu-icon" src={'/assets/allprioritization-icon.png'} alt="logout icon"/><h2>All Prioritizations</h2></button>
           </div>
-          
           <aside className="list">
             { this.state.showProjects && 
               <Projects addNewProject={this.handleNewProject} />}
           </aside>
-
           <aside>
             {this.state.showPrios && 
               <Prioritizations />}
           </aside>
-
           { this.state.showPopin && <NewProject  getData={() => this.getAllProjects()} hidePopin={this.handleNewProject} history={this.props.history}/> }
-
         </div>
       </div>
-
       : <Homepage />
     )
   }

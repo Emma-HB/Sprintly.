@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import service  from '../auth/auth-service'; 
-
 import Navbar from '../Navbar';
-
 import './Backlog.css'; 
 
 class NewPrioritization extends Component {
@@ -13,20 +11,17 @@ class NewPrioritization extends Component {
 
   getSessionPIN = () => {
     service.get(`/prioritizations/exact?id=${this.props.match.params.id}`)
-
-    .then(prioSessionFromDB => {
-      console.log('Réponse', prioSessionFromDB)
-      this.setState({
-        listOfPrioritizations: prioSessionFromDB.data
+      .then(prioSessionFromDB => {
+        this.setState({
+          listOfPrioritizations: prioSessionFromDB.data
+        })
       })
-    })
     .catch( error => console.log(error) )
   }
 
   componentDidMount() {
     this.getSessionPIN();
-    }
-  
+  }
   
   render() {
     return(
@@ -51,7 +46,7 @@ class NewPrioritization extends Component {
           </div>
         </div>
       </div>
-  )
+    )
   }
 };
 

@@ -43,7 +43,6 @@
 
 .App {
   background: var(--dark-background);
-  /* height: 100%; */
   color: var(--dark);
 }
 
@@ -97,10 +96,8 @@
   margin: 10vh auto;
   background-color: var(--light-background);
   border-radius: var(--main-radius);
-
   box-shadow: var(--light-shadow);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
-
 }
 
 .homepage-nav {
@@ -130,9 +127,14 @@
   padding: 0 30px;
 }
 
+.homepage-link.participant-link {
+  padding-right: 0;
+}
+
 .homepage h2 {
   font-family: var(--title-font);
   font-size: 170%;
+  margin-bottom: 40px;
 }
 
 .homepage-container {
@@ -148,8 +150,8 @@
 }
 
 .empty-container-1 {
-  min-height: 30vh;
-  min-width: 30vh;
+  max-height: 45vh;
+  min-width: 50vh;
   height: 45vh;
   width: 90vh;
   background-color: var(--light-background);
@@ -158,42 +160,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
 }
 
 .empty-container-1:hover {
-  min-height: 30vh;
-  min-width: 30vh;
+  max-height: 45vh;
+  min-width: 50vh;
   height: 45vh;
   width: 90vh;
   background-color: var(--light-background);
   border-radius: var(--main-radius);
   margin-left: 4vw;
-
   transform: translate(1vw, -1vh);
   transition: all .2s ease-in-out;
-
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
 }
 
 .empty-container-1 > img {
-  width: 90%;
+  width: 75%;
   height: auto;
 }
 
 .master-container {
   display: flex;
-
 }
 
 .empty-container-2 {
-  min-height: 40vh;
+  max-height: 60vh;
+  height: 60vh;
   min-width: 60vh;
   width: 60vh;
   background-color: var(--light-background);
@@ -201,68 +199,70 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
   transform: translate(-5vw, -5vh);
-
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
+  margin-top: 50px;
 }
 
 .empty-container-2:hover {
-  min-height: 40vh;
+  max-height: 60vh;
+  height: 60vh;
   min-width: 60vh;
   width: 60vh;
   background-color: var(--light-background);
   border-radius: var(--main-radius);
-  
   transform: translate(-6vw, -6vh);
   transition: all .2s ease-in-out;
-
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
 }
 
 .empty-container-2 > img {
-  width: 60%;
+  width: 80%;
   height: auto;
 }
 
 .empty-container-3 {
-  min-height: 20vh;
-  min-width: 40vh;
-  width: 40vh;
+  min-height: 25vh;
+  min-width: 45vh;
+  width: 45vh;
   background-color: var(--light-background);
   border-radius: var(--main-radius);
   display: flex;
   justify-content: center;
   align-items: center;
-
   transform: translate(50vw, 7vh);
-
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
 }
 
 .empty-container-3:hover {
-  min-height: 20vh;
-  min-width: 40vh;
-  width: 40vh;
+  min-height: 25vh;
+  min-width: 45vh;
+  width: 45vh;
   background-color: var(--light-background);
   border-radius: var(--main-radius);
-
-  transform: translate(51vw, 8vh);
+  transform: translate(49vw, 6vh);
   transition: all .2s ease-in-out;
-
   backdrop-filter: blur(10px);
   border-left: 1px solid var(--lightly-grey); border-top: 1px solid var(--lightly-grey);
   box-shadow: var(--light-shadow);
 }
 
+.empty-container-3-link {
+  width: 88%;
+  margin-left: 17px;
+  margin-bottom: 15px;
+}
+
 .features-container {
-  transform: translateY(-35px);
+  transform: translateY(-15px);
+  width: 65vh;
+  margin-left: 7vh;
 }
 
 .features-subcontainer {
@@ -273,18 +273,34 @@
 }
 
 .features-subcontainer > img {
-  margin-right: 10px;
+  width: 12%;
+  height: 50px;
+  transform: translate(-2px, -15px)
+}
+
+.prio-icon {
+margin-bottom: 35px;
+margin-right: 7px;
+}
+
+.sprint-icon {
+  margin-bottom: 15px;
 }
 
 .features-subcontainer > aside > h5 {
   font-family: var(--title-font);
   font-size: 0.9rem;
   margin-bottom: 0;
+  margin-left: 40px;
 }
 
 .features-subcontainer > aside > p {
   font-family: var(--main-font);
   font-size: 0.8rem;
+  text-align: justify;
+  margin-left: 40px;
+  padding-top: 5px;
+  color: var(--dark-grey);
 }
 
 /* 

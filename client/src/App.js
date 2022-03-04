@@ -23,7 +23,6 @@ class App extends Component {
     if (!this.state.user._id) {
       loggedin()
           .then(data => {
-            console.log(data)
             this.setState({user: data})
           })
           .catch(err => this.setState({user: false}))
@@ -47,9 +46,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
         </header>
-
         <Switch>
-
           <Route exact path='/' render={(props) => <Homepage user={this.state.user} />} />
           <Route exact path='/signup' render={(props) => (<Signup updateUser={this.updateLoggedInUser} history={props.history} />)} />
           <Route exact path='/login' render={(props) => (<Login updateUser={this.updateLoggedInUser} history={props.history} />)} />
@@ -60,7 +57,6 @@ class App extends Component {
           <Route exact path='/prioritizations/new/:id' render={(routerProps) => (<NewPrioritization updateUser={this.updateLoggedInUser} {...routerProps} />)}/>
           <Route exact path='/participant' render={(props) => (<ParticipantPages history={props.history} />)}/>
           <Route exact path='/prioritizations/:id' render={(routerProps) => (<Results {...routerProps} />)}/>
-        
         </Switch>
       </div>
     );

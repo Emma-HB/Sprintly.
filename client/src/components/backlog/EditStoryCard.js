@@ -18,9 +18,7 @@ class EditStoryCard extends Component {
 
   getStoryCard = () => {
     service.get(`/storycards/${this.props.storycardID}`)
-    .then( (storyCardFromDB) => {
-      console.log("Regarder storyCardFromDB", storyCardFromDB )
-    
+    .then( (storyCardFromDB) => {    
       const theStoryCard = storyCardFromDB.data;
       this.setState(theStoryCard);
     })

@@ -1,9 +1,7 @@
 import './ParticipantPages.css';
 import { useState, useRef, Component } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-
 import service  from '../auth/auth-service'; 
-// import ViewStoryCard from './ViewStoryCard';
 
 export default class Prioritization extends Component {
 
@@ -15,12 +13,11 @@ export default class Prioritization extends Component {
 
   getCardsFromDb = () => {
     service.get(`/prioritizations/${this.state.prioSessionId}`)
-    .then(response => {
-      //console.log(response.data.selectedStoryCard)      
-      this.setState({
-        cardsFromDb: response.data.selectedStoryCard
+      .then(response => {
+        this.setState({
+          cardsFromDb: response.data.selectedStoryCard
+        })
       })
-    })
   }
   
   componentDidMount() {
@@ -45,7 +42,6 @@ export default class Prioritization extends Component {
 const Container = ({cards, participant_email, prioSessionId}) => {
   
   //Create columns and cards
-
   const cardsById = {}
   for (let i = 0; i < cards.length; i ++) {
     const card = cards[i]  
@@ -74,7 +70,7 @@ const Container = ({cards, participant_email, prioSessionId}) => {
       // 1) Remove the cardId for all columns
       let newCardIds = column.cardIds.filter(id => id !== cardId);
 
-      // 2) If this is the destination column, insert the cardId.
+      // 2) If this is the destination column, insert the cardId
       if (column.id === destColumnId) {
         column.cardIds = [...newCardIds.slice(0, destColumnIndex), cardId, ...newCardIds.slice(destColumnIndex)];
       } else {
@@ -83,14 +79,12 @@ const Container = ({cards, participant_email, prioSessionId}) => {
       return column;
     });
     setColumns(newColumns);
-
-    console.log('prioStoryCard', columns[1].cardIds)
   };
 
   //Display a popin when the partipant has submitted his prioritization
   const [popin, setPopin] = useState(false);
 
-  //To update prioStoryCard array (push > columns[1].cardIds)
+  //To update prioStoryCard array
   const handleSubmit = () => {
     service.put((`/prioritizations/${prioSessionId}/contribute`), {participant_email, participant_prio : columns[1].cardIds})
       .then( () => {
@@ -130,10 +124,8 @@ const Container = ({cards, participant_email, prioSessionId}) => {
               </Column>
             ))}
         </div>
-
         <div><button className='prioritization-submit blue-btn' onClick={() => handleSubmit()}>Submit</button></div>
       </div>
-
       {popin &&
         <div className="sucess-popin-background">
           <div className="sucess-popin">
@@ -200,11 +192,9 @@ const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, c
           <h3>{summary}</h3>
           <button className="view-description" onClick={e => showViewPopin()}><img src={'/assets/view-more-icon.png'} alt="" /></button>
         </div>
-
         {viewPopin && 
           <div className="description-SC-container">{description}</div>
         }
-        
         <div className="infos-SC-wrapper">
           <div>
             <p className="epic">Epic: <span>{epic}</span></p>
@@ -214,7 +204,6 @@ const DraggableCard = ({ summary, epic, priority, estimation, external_id, id, c
             </div>
           </div>
           <h4>ID: {external_id}</h4>
-
         </div>
     </div>
     : <div className="drop-target-container" ref={ref}><p>Drop a card here</p></div>
